@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Quản Lý Bệnh Nhân – Med Lab</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/modules.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main-content">
+    <header class="topbar" id="topbar"></header>
+    <main class="page-content">
+
+      <div class="page-header">
+        <div class="page-header__left">
+          <h2>Quản Lý Bệnh Nhân</h2>
+          <p>Thêm / bớt bệnh nhân theo ngày. Ngừng điều trị → tự động hủy block và trả lại slot trống.</p>
+        </div>
+        <div class="page-header__actions">
+          <input type="date" id="ptDate" class="form-input" style="width:160px"/>
+          <button class="btn btn--primary" onclick="openModal('addPatientModal')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Thêm bệnh nhân
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="patient-status-row" id="ptStats"></div>
+
+      <!-- Filter -->
+      <div class="filter-bar">
+        <div class="topbar__search" style="min-width:280px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="text" id="ptSearch" placeholder="Tìm tên, mã BN..." oninput="renderPatientTable()"/>
+        </div>
+        <select class="form-select" id="ptStatusFilter" onchange="renderPatientTable()" style="width:180px">
+          <option value="">Tất cả trạng thái</option>
+          <option value="active">Đang điều trị</option>
+          <option value="stopped">Ngừng điều trị</option>
+        </select>
+        <button class="btn btn--ghost btn--sm" onclick="exportCSV()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Xuất CSV
+        </button>
+      </div>
+
+      <!-- Table -->
+      <div class="card" style="padding:0; overflow:hidden">
+        <div class="table-wrap">
+          <table class="data-table" id="patientTable">
+            <thead>
+              <tr>
+                <th>Mã BN</th>
+                <th>Họ và tên</th>
+                <th>Ngày nhập viện</th>
+                <th>Số thủ thuật hôm nay</th>
+                <th>Ghi chú</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="patientTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Freed blocks panel -->
+      <div class="card" id="freedBlocksCard" style="margin-top:16px;display:none">
+        <div class="card-header">
+          <div class="card-title" style="color:var(--color-success)">✅ Block thời gian vừa được trả về TRỐNG</div>
+          <button class="btn btn--ghost btn--sm" onclick="document.getElementById('freedBlocksCard').style.display='none'">Đóng</button>
+        </div>
+        <div id="freedBlocksList" class="transfer-list"></div>
+        <div class="alert-box alert-box--success" style="margin-top:12px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          Các slot này đã sẵn sàng gán cho bệnh nhân khác trong <a href="schedule-matrix.html" style="color:var(--color-primary);font-weight:600">Ma trận lịch</a>.
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Add Patient Modal -->
+<div class="modal-overlay" id="addPatientModal">
+  <div class="modal">
+    <div class="modal__header"><div class="modal__title">Thêm bệnh nhân mới</div><button class="modal__close" onclick="closeModal('addPatientModal')">✕</button></div>
+    <div class="modal__body">
+      <div class="form-row">
+        <div class="form-group" style="flex:2"><label class="form-label">Họ và tên <span style="color:red">*</span></label><input class="form-input" id="ptName" placeholder="VD: Nguyễn Thị Mai"/></div>
+        <div class="form-group"><label class="form-label">Mã BN (PID)</label><input class="form-input" id="ptPID" placeholder="BN-xxx"/></div>
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="form-group"><label class="form-label">Ngày nhập viện</label><input class="form-input" type="date" id="ptAdmit"/></div>
+        <div class="form-group"><label class="form-label">Ghi chú</label><input class="form-input" id="ptNote" placeholder="Mã viện, diễn biến..."/></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" onclick="closeModal('addPatientModal')">Hủy</button>
+      <button class="btn btn--primary" onclick="addPatient()">Thêm bệnh nhân</button>
+    </div>
+  </div>
+</div>
+
+<!-- Stop Treatment Modal -->
+<div class="modal-overlay" id="stopModal">
+  <div class="modal">
+    <div class="modal__header"><div class="modal__title" id="stopModalTitle">Ngừng điều trị</div><button class="modal__close" onclick="closeModal('stopModal')">✕</button></div>
+    <div class="modal__body">
+      <div class="alert-box alert-box--warn" style="margin-bottom:16px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Hành động này sẽ hủy TẤT CẢ block thủ thuật của bệnh nhân từ hôm nay trở đi và trả về trạng thái TRỐNG.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Lý do ngừng điều trị</label>
+        <select class="form-select" id="stopReason">
+          <option>Diễn biến bệnh xấu – chuyển viện</option>
+          <option>Kém hợp tác</option>
+          <option>Bệnh nhân tự ý rời viện</option>
+          <option>Hoàn thành liệu trình</option>
+          <option>Lý do khác</option>
+        </select>
+      </div>
+      <div id="stopBlockCount" style="margin-top:12px;font-size:13px;color:var(--color-gray-600)"></div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" onclick="closeModal('stopModal')">Hủy</button>
+      <button class="btn btn--danger" onclick="confirmStop()">Xác nhận ngừng điều trị</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/patient.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSidebar('patient-management');
+    renderTopbar();
+    document.getElementById('ptDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('ptAdmit').value = new Date().toISOString().split('T')[0];
+    renderPatientTable();
+    renderPtStats();
+  });
+</script>
+</body>
+</html>

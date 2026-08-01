@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phân Bổ Thời Gian – Med Lab</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/app.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar__brand"><div class="sidebar__logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></div><div><div class="sidebar__title">Med Lab</div><div class="sidebar__sub">Hệ thống quản lý</div></div></div>
+    <nav class="sidebar__nav">
+      <a class="nav-item" href="dashboard.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Bảng điều khiển</a>
+      <a class="nav-item" href="calendar.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Thủ tục Y tế</a>
+      <a class="nav-item active" href="time-allocation.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Phân bổ thời gian<svg class="nav-item__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+    </nav>
+    <div class="sidebar__footer">
+      <a class="nav-item" href="#"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>Cài đặt hệ thống</a>
+      <a class="nav-item" href="#"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>Trợ giúp</a>
+      <a class="nav-item nav-item--danger" href="login.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Đăng xuất</a>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <header class="topbar">
+      <nav class="topbar__breadcrumb">
+        <a href="#">Bệnh viện</a><span class="sep">›</span>
+        <a href="dashboard.html">Dashboard</a><span class="sep">›</span>
+        <span class="current">Tổng quan thủ thuật</span>
+      </nav>
+      <div class="topbar__right">
+        <div class="topbar__search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Tìm kiếm bệnh nhân, thủ thuật..." /></div>
+        <div class="topbar__notif"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="topbar__notif-badge">3</span></div>
+        <div class="topbar__user"><div class="topbar__avatar">VA</div><div class="topbar__user-info"><div class="topbar__user-name">BS. Nguyễn Văn A</div><div class="topbar__user-role">Khoa Ngoại</div></div></div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <!-- Page header -->
+      <div class="ta-header">
+        <div>
+          <h2 class="ta-title">Quản lý Phân bổ Thời gian</h2>
+          <p class="ta-sub">Theo dõi và điều chỉnh quỹ thời gian nhân sự và thiết bị hàng ngày.</p>
+        </div>
+        <div class="ta-header__actions">
+          <button class="btn btn--ghost" onclick="refreshData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Làm mới
+          </button>
+          <button class="btn btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="2"/></svg>
+            Lưu thay đổi
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary stats -->
+      <div class="ta-stats">
+        <div class="ta-stat-card">
+          <div class="ta-stat-icon" style="background:#EFF6FF">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/></svg>
+          </div>
+          <div class="ta-stat-label">Nhân sự trực</div>
+          <div class="ta-stat-val">12 / 15</div>
+        </div>
+        <div class="ta-stat-card">
+          <div class="ta-stat-icon" style="background:#F0FDF4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#22C55E" stroke-width="2"/></svg>
+          </div>
+          <div class="ta-stat-label">Máy sẵn sàng</div>
+          <div class="ta-stat-val">8 / 10</div>
+        </div>
+        <div class="ta-stat-card">
+          <div class="ta-stat-icon" style="background:#FFFBEB">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#F59E0B" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ta-stat-label">Tỉ lệ lấp đầy</div>
+          <div class="ta-stat-val">78%</div>
+        </div>
+        <div class="ta-stat-card">
+          <div class="ta-stat-icon" style="background:#F5F3FF">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#7C3AED" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ta-stat-label">Ngày làm việc</div>
+          <div class="ta-stat-val">14/10/2023</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="ta-tabs">
+        <button class="ta-tab active" onclick="switchTATab(this,'overview')">Tổng hợp</button>
+        <button class="ta-tab" onclick="switchTATab(this,'staff')">Quỹ giờ Nhân sự</button>
+        <button class="ta-tab" onclick="switchTATab(this,'device')">Hiệu suất Máy</button>
+        <div style="margin-left:auto">
+          <div class="topbar__search" style="min-width:220px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Tìm kiếm nhân viên hoặc thiết bị..." /></div>
+        </div>
+      </div>
+
+      <div class="ta-grid">
+        <!-- LEFT: Staff list -->
+        <div class="ta-left">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Danh sách Nhân sự hôm nay</div>
+                <div class="card-sub">Phân bổ 8 giờ làm việc tiêu chuẩn (480 phút)</div>
+              </div>
+              <a href="#" class="btn btn--ghost btn--sm">Xem tất cả <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+            </div>
+            <div class="ta-table-head">
+              <span>Nhân viên</span>
+              <span>Trạng thái</span>
+              <span style="flex:2">Phân bổ thời gian</span>
+              <span></span>
+            </div>
+            <div class="ta-staff-list" id="taStaffList">
+              <div class="ta-staff-row">
+                <div class="ta-staff-info"><div class="staff-avatar" style="background:linear-gradient(135deg,#2563EB,#7C3AED)">VA</div><div><div class="ta-staff-name">BS. Nguyễn Văn A</div><div class="ta-staff-dept">Khoa Ngoại</div></div></div>
+                <span class="badge badge--red" style="font-size:11px">Đang bận</span>
+                <div class="ta-quota-bar">
+                  <div class="ta-quota-text">Đã dùng: 320P &nbsp;Tổng: 480P</div>
+                  <div class="progress-bar"><div class="progress-bar__fill" style="width:67%;background:var(--color-primary)"></div></div>
+                </div>
+                <button class="icon-btn">⋮</button>
+              </div>
+              <div class="ta-staff-row">
+                <div class="ta-staff-info"><div class="staff-avatar" style="background:linear-gradient(135deg,#059669,#10B981)">TB</div><div><div class="ta-staff-name">DD. Lê Thị B</div><div class="ta-staff-dept">Khoa Ngoại</div></div></div>
+                <span class="badge badge--green" style="font-size:11px">Sẵn sàng</span>
+                <div class="ta-quota-bar">
+                  <div class="ta-quota-text">Đã dùng: 120P &nbsp;Tổng: 480P</div>
+                  <div class="progress-bar"><div class="progress-bar__fill" style="width:25%;background:var(--color-success)"></div></div>
+                </div>
+                <button class="icon-btn">⋮</button>
+              </div>
+              <div class="ta-staff-row">
+                <div class="ta-staff-info"><div class="staff-avatar" style="background:var(--color-gray-300);color:var(--color-gray-700)">K</div><div><div class="ta-staff-name">KTV. Trần Văn C</div><div class="ta-staff-dept">Phòng Xét nghiệm</div></div></div>
+                <span class="badge badge--red" style="font-size:11px;background:#FEF2F2;color:var(--color-danger)">Hết chỗ</span>
+                <div class="ta-quota-bar">
+                  <div class="ta-quota-text">Đã dùng: 460P &nbsp;Tổng: 480P</div>
+                  <div class="progress-bar"><div class="progress-bar__fill" style="width:96%;background:var(--color-danger)"></div></div>
+                </div>
+                <button class="icon-btn">⋮</button>
+              </div>
+              <div class="ta-staff-row">
+                <div class="ta-staff-info"><div class="staff-avatar" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">PD</div><div><div class="ta-staff-name">TS. Phạm Minh D</div><div class="ta-staff-dept">Chẩn đoán hình ảnh</div></div></div>
+                <span class="badge badge--green" style="font-size:11px">Sẵn sàng</span>
+                <div class="ta-quota-bar">
+                  <div class="ta-quota-text">Đã dùng: 200P &nbsp;Tổng: 420P</div>
+                  <div class="progress-bar"><div class="progress-bar__fill" style="width:48%;background:var(--color-primary)"></div></div>
+                </div>
+                <button class="icon-btn">⋮</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Timeline (Gantt-like) -->
+          <div class="card" style="margin-top:20px">
+            <div class="card-header">
+              <div class="card-title">Bảng điều khiển trực quan (Timeline)</div>
+              <div style="font-size:12px;color:var(--color-gray-500)">08:00 – 18:00</div>
+            </div>
+            <div class="timeline-wrap" id="timelineWrap">
+              <!-- header -->
+              <div class="tl-header">
+                <div class="tl-name-col">Nhân viên</div>
+                <div class="tl-hours">
+                  <span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:00</span>
+                </div>
+              </div>
+              <!-- rows -->
+              <div class="tl-row">
+                <div class="tl-name">BS. Nguyễn A</div>
+                <div class="tl-blocks">
+                  <div class="tl-block safe"  style="left:0%;width:20%">08:30 Nội soi</div>
+                  <div class="tl-block safe"  style="left:25%;width:25%">10:15 MRI</div>
+                  <div class="tl-block warn"  style="left:52%;width:15%" title="Cảnh báo trùng">⚠ 13:00</div>
+                  <div class="tl-block safe"  style="left:70%;width:18%">15:45 XN</div>
+                </div>
+              </div>
+              <div class="tl-row">
+                <div class="tl-name">DD. Lê Thị B</div>
+                <div class="tl-blocks">
+                  <div class="tl-block safe" style="left:10%;width:18%">09:00 Phụ tá</div>
+                  <div class="tl-block safe" style="left:60%;width:20%">14:00 Phụ tá</div>
+                </div>
+              </div>
+              <div class="tl-row">
+                <div class="tl-name">KTV. Trần C</div>
+                <div class="tl-blocks">
+                  <div class="tl-block safe" style="left:0%;width:15%">08:00 Lab</div>
+                  <div class="tl-block safe" style="left:18%;width:15%">09:30 Lab</div>
+                  <div class="tl-block safe" style="left:36%;width:15%">11:00 Lab</div>
+                  <div class="tl-block safe" style="left:54%;width:15%">13:30 Lab</div>
+                  <div class="tl-block safe" style="left:73%;width:15%">16:00 Lab</div>
+                </div>
+              </div>
+              <div class="tl-row">
+                <div class="tl-name">TS. Phạm D</div>
+                <div class="tl-blocks">
+                  <div class="tl-block safe" style="left:5%;width:30%">08:30 CT Scan</div>
+                  <div class="tl-block safe" style="left:50%;width:25%">13:00 X-Quang</div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-legend">
+              <span class="tl-legend-item safe">■ An toàn BHYT</span>
+              <span class="tl-legend-item warn">■ Cảnh báo trùng lịch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Devices + Notice -->
+        <div class="ta-right">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Thiết bị Trọng tâm</div>
+            </div>
+            <div class="ta-device-list">
+              <div class="ta-device-item">
+                <div class="ta-device-header">
+                  <div>
+                    <div class="ta-device-name">Máy Chụp CT 128 Lát</div>
+                    <div class="ta-device-code">CT-SCAN-01</div>
+                  </div>
+                  <span class="badge badge--red" style="font-size:10px">Đang bận</span>
+                </div>
+                <div class="ta-device-quota">
+                  <span>Đã dùng: 580P</span><span>Tổng: 720P</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar__fill" style="width:81%;background:var(--color-danger)"></div></div>
+              </div>
+              <div class="ta-device-item">
+                <div class="ta-device-header">
+                  <div>
+                    <div class="ta-device-name">Máy Cộng Hưởng Từ MRI</div>
+                    <div class="ta-device-code">MRI-CORE-02</div>
+                  </div>
+                  <span class="badge badge--green" style="font-size:10px">Sẵn sàng</span>
+                </div>
+                <div class="ta-device-quota">
+                  <span>Đã dùng: 150P</span><span>Tổng: 720P</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar__fill" style="width:21%;background:var(--color-success)"></div></div>
+              </div>
+              <div class="ta-device-item">
+                <div class="ta-device-header">
+                  <div>
+                    <div class="ta-device-name">Hệ thống nội soi Olympus</div>
+                    <div class="ta-device-code">ENDO-OLY-03</div>
+                  </div>
+                  <span class="badge badge--blue" style="font-size:10px">Hoạt động</span>
+                </div>
+                <div class="ta-device-quota">
+                  <span>Đã dùng: 360P</span><span>Tổng: 600P</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar__fill" style="width:60%;background:var(--color-primary)"></div></div>
+              </div>
+            </div>
+            <a href="#" class="btn btn--ghost btn--sm" style="width:100%;justify-content:center;margin-top:12px">Quản lý thiết bị <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+          </div>
+
+          <!-- Compliance notice -->
+          <div class="ta-notice card--blue-deep" style="margin-top:20px">
+            <div class="ta-notice__header">Thông báo Tuần thủ</div>
+            <p>Theo Thông tư 43/2013/TT-BYT về phân bổ giờ công chuẩn.</p>
+            <div class="ta-notice__check">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tất cả nhân sự Khoa Ngoại đã được cập nhật quỹ thời gian chính xác cho ca trực ngày hôm nay.
+            </div>
+            <button class="btn btn--ghost btn--sm" style="margin-top:14px;width:100%;justify-content:center;background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.3)" onclick="window.location='dashboard.html'">Xem báo cáo</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compliance footer -->
+      <div class="compliance-bar">
+        <div class="compliance-bar__left"><div class="compliance-bar__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="compliance-bar__title">Tuần thủ Quy định Y tế</div><div class="compliance-bar__sub">Hệ thống đáp ứng hoàn toàn Thông tư 43/2013/TT-BYT về phân tuyến kỹ thuật.</div></div></div>
+        <div class="compliance-bar__right"><button class="btn btn--ghost btn--sm">Phiên bản: 4.2.0-STABLE</button><button class="btn btn--ghost btn--sm">Xem chứng chỉ ISO</button></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSidebar('time-allocation');
+    renderTopbar();
+  });
+  function switchTATab(btn, type) {
+    document.querySelectorAll('.ta-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function refreshData() {
+    const btn = event.target.closest('button');
+    btn.innerHTML = '⏳ Đang cập nhật...';
+    setTimeout(() => { btn.innerHTML = '🔄 Làm mới'; }, 1200);
+  }
+</script>
+</body>
+</html>

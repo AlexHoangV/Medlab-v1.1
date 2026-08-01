@@ -1,0 +1,6 @@
+{
+  "name": "MedLab AI",
+  "description": "Hệ thống AI điều phối thủ thuật y tế & Tuân thủ BHYT (AI Procedure Scheduling & Compliance)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

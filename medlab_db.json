@@ -1,0 +1,316 @@
+{
+  "version": "1.2.0",
+  "lastUpdated": "2026-08-01T16:37:59.771Z",
+  "staff": [
+    {
+      "id": 1,
+      "fullName": "Liễu",
+      "shortName": "LIỄU",
+      "role": "TECHNICIAN",
+      "specialty": "Xoa bóp vùng",
+      "isActive": true,
+      "color": "#3B82F6",
+      "initials": "LI"
+    },
+    {
+      "id": 2,
+      "fullName": "Thu Hằng",
+      "shortName": "THU HẰNG",
+      "role": "TECHNICIAN",
+      "specialty": "Xoa bóp vùng",
+      "isActive": true,
+      "color": "#8B5CF6",
+      "initials": "TH"
+    },
+    {
+      "id": 3,
+      "fullName": "Thạch",
+      "shortName": "THẠCH",
+      "role": "TECHNICIAN",
+      "specialty": "Tập vận động",
+      "isActive": true,
+      "color": "#059669",
+      "initials": "TH2"
+    },
+    {
+      "id": 4,
+      "fullName": "Tâm",
+      "shortName": "TÂM",
+      "role": "TECHNICIAN",
+      "specialty": "Tập vận động",
+      "isActive": true,
+      "color": "#D97706",
+      "initials": "TM"
+    },
+    {
+      "id": 5,
+      "fullName": "Nhân",
+      "shortName": "NHÂN",
+      "role": "TECHNICIAN",
+      "specialty": "Tập vận động",
+      "isActive": true,
+      "color": "#DC2626",
+      "initials": "NH"
+    },
+    {
+      "id": 6,
+      "fullName": "Tâm (SA)",
+      "shortName": "TÂM SA",
+      "role": "TECHNICIAN",
+      "specialty": "Siêu âm SAD02",
+      "isActive": true,
+      "color": "#0891B2",
+      "initials": "TS"
+    },
+    {
+      "id": 7,
+      "fullName": "Như",
+      "shortName": "NHƯ",
+      "role": "TECHNICIAN",
+      "specialty": "Xoa bóp",
+      "isActive": true,
+      "color": "#7C3AED",
+      "initials": "NH2"
+    },
+    {
+      "id": 8,
+      "fullName": "Như (NN)",
+      "shortName": "NHƯ NN",
+      "role": "TECHNICIAN",
+      "specialty": "Tập ngôn ngữ",
+      "isActive": true,
+      "color": "#BE185D",
+      "initials": "NN"
+    },
+    {
+      "id": 9,
+      "fullName": "BS. Nguyễn Văn A",
+      "shortName": "BS.VAN A",
+      "role": "DOCTOR",
+      "specialty": "Điện châm",
+      "isActive": true,
+      "color": "#1D4ED8",
+      "initials": "VA"
+    },
+    {
+      "id": 10,
+      "fullName": "BS. Trần K.",
+      "shortName": "BS.TRANK",
+      "role": "DOCTOR",
+      "specialty": "Thủy châm",
+      "isActive": true,
+      "color": "#065F46",
+      "initials": "TK"
+    }
+  ],
+  "patients": [
+    {
+      "id": "P001",
+      "fullName": "Lĩnh",
+      "hospitalCode": "13/07-B",
+      "dischargeDate": "13/07",
+      "condition": "Thoái hóa Cột sống",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "P002",
+      "fullName": "Chê",
+      "hospitalCode": "26/06-T",
+      "dischargeDate": "26/06",
+      "condition": "Tai biến mạch máu não",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "P003",
+      "fullName": "Phương",
+      "hospitalCode": "06/07-A",
+      "dischargeDate": "06/07",
+      "condition": "Viêm quanh khớp vai",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "P004",
+      "fullName": "Oanh",
+      "hospitalCode": "28/07-C",
+      "dischargeDate": "28/07",
+      "condition": "Hội chứng ống cổ tay",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "P005",
+      "fullName": "Thân",
+      "hospitalCode": "22/07-D",
+      "dischargeDate": "22/07",
+      "condition": "Đau thần kinh tọa",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "P006",
+      "fullName": "Thiết",
+      "hospitalCode": "21/07-E",
+      "dischargeDate": "21/07",
+      "condition": "Liệt dây thần kinh VII",
+      "status": "ACTIVE"
+    }
+  ],
+  "machines": [
+    {
+      "id": 1,
+      "stt": 1,
+      "tenTB": "Đèn hồng ngoại",
+      "kyHieu": "YK12",
+      "maDVKT": "1.700.110.237",
+      "tenDVKT": "Điều trị bằng hồng ngoại",
+      "maMay": "HN.1.26017.HN1",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "hong_ngoai"
+      ]
+    },
+    {
+      "id": 2,
+      "stt": 7,
+      "tenTB": "Máy châm cứu 6 kênh",
+      "kyHieu": "ES-160",
+      "maDVKT": "800.050.230",
+      "tenDVKT": "Điều trị bằng điện châm",
+      "maMay": "CC6.1.26017.Seebarcodeseal.1",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "dien_cham"
+      ]
+    },
+    {
+      "id": 3,
+      "stt": 8,
+      "tenTB": "Máy điện châm KWD-808I",
+      "kyHieu": "KWD-808I",
+      "maDVKT": "800.050.230",
+      "tenDVKT": "Điều trị bằng điện châm",
+      "maMay": "CC.1.26017.1603-0603",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "dien_cham"
+      ]
+    },
+    {
+      "id": 4,
+      "stt": 22,
+      "tenTB": "Máy điện trường cao áp",
+      "kyHieu": "Bios-9000",
+      "maDVKT": "1.700.270.232",
+      "tenDVKT": "Điều trị bằng điện trường cao áp",
+      "maMay": "ĐTC.1.26017.32700324T",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "dien_truong"
+      ]
+    },
+    {
+      "id": 5,
+      "stt": 20,
+      "tenTB": "Máy điện phân",
+      "kyHieu": "IONO BASE+",
+      "maDVKT": "1.700.060.231",
+      "tenDVKT": "Điều trị bằng điện phân dẫn thuốc",
+      "maMay": "ĐPT.1.26017.",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "dien_phan"
+      ]
+    },
+    {
+      "id": 6,
+      "stt": 31,
+      "tenTB": "Máy oxy cao áp 3300H",
+      "kyHieu": "3300H",
+      "maDVKT": "300.591.116",
+      "tenDVKT": "Điều trị bằng oxy cao áp",
+      "maMay": "OCA.1.26017.33HS0575",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "oxy_cao_ap"
+      ]
+    },
+    {
+      "id": 7,
+      "stt": 38,
+      "tenTB": "Máy siêu âm điều trị US-101L",
+      "kyHieu": "US-101L",
+      "maDVKT": "1.700.050.232",
+      "tenDVKT": "Điều trị bằng siêu âm",
+      "maMay": "SAĐ.1.26017.0672111",
+      "khoaSD": "VLTL",
+      "status": "ACTIVE",
+      "procedureIds": [
+        "sieu_am"
+      ]
+    }
+  ],
+  "schedules": [
+    {
+      "id": "S001",
+      "date": "2026-08-01",
+      "staffId": 1,
+      "patientId": "P001",
+      "machineCode": "SAĐ.1.26017.0672111",
+      "procedureId": "sieu_am",
+      "procedureType": "ONE_TO_ONE",
+      "startTime": "08:00",
+      "endTime": "08:15",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "S002",
+      "date": "2026-08-01",
+      "staffId": 1,
+      "patientId": "P003",
+      "machineCode": "SAĐ.1.26017.0672111",
+      "procedureId": "sieu_am",
+      "procedureType": "ONE_TO_ONE",
+      "startTime": "08:18",
+      "endTime": "08:33",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "S003",
+      "date": "2026-08-01",
+      "staffId": 3,
+      "patientId": "P004",
+      "machineCode": "OCA.1.26017.33HS0575",
+      "procedureId": "oxy_cao_ap",
+      "procedureType": "ONE_TO_MANY",
+      "startTime": "07:41",
+      "endTime": "08:41",
+      "status": "SCHEDULED"
+    },
+    {
+      "id": "S004",
+      "date": "2026-08-01",
+      "staffId": 3,
+      "patientId": "P005",
+      "machineCode": "OCA.1.26017.33HS0575",
+      "procedureId": "oxy_cao_ap",
+      "procedureType": "ONE_TO_MANY",
+      "startTime": "08:46",
+      "endTime": "09:46",
+      "status": "SCHEDULED"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "A001",
+      "timestamp": "2026-08-01T16:37:59.772Z",
+      "type": "SYSTEM_INIT",
+      "message": "Khởi tạo hệ thống MedLab AI Database theo 3 Google Sheets VLTL",
+      "oldVal": null,
+      "newVal": "INIT"
+    }
+  ]
+}

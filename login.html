@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng Nhập – Med Lab</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="login-body">
+
+  <div class="login-layout">
+    <!-- ── LEFT PANEL ── -->
+    <div class="login-left">
+      <div class="login-left__bg"></div>
+      <div class="login-left__content">
+        <div class="login-brand">
+          <div class="login-brand__logo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M12 7v5M9.5 10l2.5 2 2.5-2" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="login-brand__name">Med Lab</div>
+            <div class="login-brand__sub">Hệ Thống Quản Lý</div>
+          </div>
+        </div>
+
+        <div class="login-left__hero">
+          <h1>Chào mừng trở lại</h1>
+          <p>Hệ thống kiểm toán thời gian thực – bảo vệ doanh thu bệnh viện khỏi xuất toán BHYT.</p>
+        </div>
+
+        <div class="login-features">
+          <div class="login-feature">
+            <div class="login-feature__icon safe">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="login-feature__title">Anti-Collision 4D</div>
+              <div class="login-feature__sub">Chặn trùng lịch trước khi xảy ra</div>
+            </div>
+          </div>
+          <div class="login-feature">
+            <div class="login-feature__icon blue">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="login-feature__title">Tuân thủ TT 43/2013/TT-BYT</div>
+              <div class="login-feature__sub">Chuẩn hóa theo quy định Bộ Y tế</div>
+            </div>
+          </div>
+          <div class="login-feature">
+            <div class="login-feature__icon yellow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="login-feature__title">Thời gian thực</div>
+              <div class="login-feature__sub">Cập nhật lịch tức thì toàn khoa</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="login-compliance">
+          <div class="compliance-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+            Phiên bản 4.2.0-STABLE
+          </div>
+          <div class="compliance-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Chứng chỉ ISO
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT PANEL (FORM) ── -->
+    <div class="login-right">
+      <div class="login-form-wrap">
+        <div class="login-form-header">
+          <h2>Đăng nhập</h2>
+          <p>Nhập thông tin tài khoản bác sĩ / nhân viên y tế</p>
+        </div>
+
+        <!-- Role selector -->
+        <div class="role-selector">
+          <button class="role-btn active" data-role="doctor">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+            Bác sĩ / KTV
+          </button>
+          <button class="role-btn" data-role="nurse">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Điều dưỡng
+          </button>
+          <button class="role-btn" data-role="admin">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+            Quản trị viên
+          </button>
+        </div>
+
+        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="username">Mã nhân viên / Email</label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+              <input class="form-input input-with-icon" type="text" id="username" placeholder="BS.NGUYENVANA hoặc doctor@hospital.vn" value="BS.NGUYENVANA" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Mật khẩu</label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg>
+              <input class="form-input input-with-icon" type="password" id="password" placeholder="••••••••" value="medlab2026" />
+              <button type="button" class="input-toggle" onclick="togglePassword()" title="Hiện mật khẩu">
+                <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="login-form__row">
+            <label class="checkbox-label">
+              <input type="checkbox" checked />
+              <span class="checkmark"></span>
+              Ghi nhớ đăng nhập
+            </label>
+            <a href="#" class="forgot-link">Quên mật khẩu?</a>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full btn--lg" id="loginBtn">
+            <span id="loginBtnText">Đăng nhập hệ thống</span>
+            <span id="loginBtnLoader" style="display:none">
+              <svg class="spin" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Đang xác thực...
+            </span>
+          </button>
+        </form>
+
+        <div class="login-divider"><span>hoặc đăng nhập nhanh với</span></div>
+
+        <div class="sso-buttons">
+          <button class="sso-btn" onclick="quickLogin()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#2563EB" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg>
+            VNPT HIS
+          </button>
+          <button class="sso-btn" onclick="quickLogin()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#059669" stroke-width="2"/></svg>
+            Viettel HIS
+          </button>
+        </div>
+
+        <div class="login-footer-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/></svg>
+          Hệ thống tuân thủ Thông tư 43/2013/TT-BYT &amp; Quyết định 3618/QĐ-BHXH
+        </div>
+
+        <div class="demo-hint">
+          <strong>Demo:</strong> Nhấn "Đăng nhập hệ thống" để truy cập ngay →
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const p = document.getElementById('password');
+      p.type = p.type === 'password' ? 'text' : 'password';
+    }
+
+    document.querySelectorAll('.role-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const txt = document.getElementById('loginBtnText');
+      const ldr = document.getElementById('loginBtnLoader');
+      btn.disabled = true;
+      txt.style.display = 'none';
+      ldr.style.display = 'inline-flex';
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+    }
+
+    function quickLogin() {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

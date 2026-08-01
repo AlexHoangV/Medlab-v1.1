@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Ma Trận Lịch Thủ Thuật – Med Lab</title>
+  <link rel="stylesheet" href="styles/main.css"/>
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/modules.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="main-content">
+    <header class="topbar" id="topbar"></header>
+    <main class="page-content" style="padding: 16px 20px;">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div class="page-header__left">
+          <h2>Ma Trận Lịch Thủ Thuật</h2>
+          <p>Drag &amp; Drop block thời gian giống Google Sheet. Anti-Collision 4D kiểm tra tức thì.</p>
+        </div>
+        <div class="page-header__actions">
+          <input type="date" id="matrixDate" class="form-input" style="width:160px" onchange="renderMatrix()"/>
+          <button class="btn btn--ghost btn--sm" onclick="exportMatrixCSV()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> CSV
+          </button>
+          <button class="btn btn--primary" onclick="openModal('addBlockModal')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Thêm ca
+          </button>
+        </div>
+      </div>
+
+      <!-- Collision summary -->
+      <div id="collisionBanner" style="display:none" class="alert-box alert-box--danger" style="margin-bottom:12px"></div>
+
+      <!-- Matrix -->
+      <div class="matrix-wrap">
+        <div class="matrix-toolbar">
+          <span style="font-size:12px;font-weight:600;color:var(--color-gray-700)">Khung giờ 07:40 – 17:00 | Bước: 5 phút</span>
+          <div style="display:flex;gap:6px;margin-left:auto">
+            <button class="btn btn--ghost btn--sm" onclick="filterView('all')">Tất cả</button>
+            <button class="btn btn--ghost btn--sm" onclick="filterView('1to1')">1:1</button>
+            <button class="btn btn--ghost btn--sm" onclick="filterView('1tomany')">1-Nhiều</button>
+          </div>
+          <label style="font-size:12px;display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="showEmpty" onchange="renderMatrix()"/> Hiện slot trống
+          </label>
+        </div>
+        <div class="matrix-table-wrap">
+          <table class="matrix-table" id="matrixTable"></table>
+        </div>
+        <div class="matrix-legend">
+          <div class="matrix-legend-item"><div class="matrix-legend-dot" style="background:#DBEAFE;border-left:3px solid #2563EB"></div>Thủ thuật 1:1 (khoảng cách 2 phút)</div>
+          <div class="matrix-legend-item"><div class="matrix-legend-dot" style="background:#EDE9FE;border-left:3px solid #7C3AED"></div>Thủ thuật 1-Nhiều (khoảng cách 5 phút BHYT)</div>
+          <div class="matrix-legend-item"><div class="matrix-legend-dot" style="background:#FEE2E2;border-left:3px solid #EF4444"></div>⚠ Xung đột – cần xử lý</div>
+          <div class="matrix-legend-item"><div class="matrix-legend-dot" style="background:#D1FAE5;border-left:3px solid #22C55E"></div>Slot trống – có thể đặt</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Add Block Modal -->
+<div class="modal-overlay" id="addBlockModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal__header"><div class="modal__title">Thêm ca thủ thuật mới</div><button class="modal__close" onclick="closeModal('addBlockModal')">✕</button></div>
+    <div class="modal__body">
+      <!-- Procedure type toggle -->
+      <div class="proc-type-toggle">
+        <button class="proc-type-btn active blue" id="type1to1Btn" onclick="selectProcType('ONE_TO_ONE')">
+          <span>Thủ thuật 1:1</span>
+          <span class="proc-type-btn__label">1 KTV → 1 bệnh nhân (buffer 2 phút)</span>
+        </button>
+        <button class="proc-type-btn purple" id="type1manyBtn" onclick="selectProcType('ONE_TO_MANY')">
+          <span>Thủ thuật 1-Nhiều</span>
+          <span class="proc-type-btn__label">1 KTV → nhiều BN (buffer 5 phút BHYT)</span>
+        </button>
+      </div>
+      <div class="buffer-info buffer-info--blue" id="bufferInfo">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Buffer tối thiểu: <strong>2 phút</strong> giữa 2 bệnh nhân liên tiếp của cùng 1 KTV
+      </div>
+      <div class="form-row" style="margin-top:16px">
+        <div class="form-group"><label class="form-label">Bệnh nhân <span style="color:red">*</span></label>
+          <select class="form-select" id="blockPatient"></select>
+        </div>
+        <div class="form-group"><label class="form-label">Loại thủ thuật <span style="color:red">*</span></label>
+          <select class="form-select" id="blockProcedure" onchange="onBlockProcChange()"></select>
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="form-group"><label class="form-label">Nhân sự thực hiện <span style="color:red">*</span></label>
+          <select class="form-select" id="blockStaff" onchange="checkBlockCollision()"></select>
+        </div>
+        <div class="form-group"><label class="form-label">Máy sử dụng</label>
+          <select class="form-select" id="blockMachine"><option value="">-- Không dùng máy --</option></select>
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="form-group"><label class="form-label">Giờ bắt đầu <span style="color:red">*</span></label>
+          <input class="form-input" type="time" id="blockStart" value="08:00" oninput="calcBlockEnd(); checkBlockCollision()"/>
+        </div>
+        <div class="form-group"><label class="form-label">Giờ kết thúc (tự tính)</label>
+          <input class="form-input" type="time" id="blockEnd" readonly style="background:var(--color-gray-50);font-weight:700;color:var(--color-primary)"/>
+        </div>
+      </div>
+      <!-- Collision check result -->
+      <div id="blockCollisionResult" style="margin-top:12px"></div>
+      <!-- Smart slot suggestions -->
+      <div id="smartSlots" style="margin-top:12px"></div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" onclick="closeModal('addBlockModal')">Hủy</button>
+      <button class="btn btn--primary" id="saveBlockBtn" onclick="saveBlock()">Đặt lịch</button>
+    </div>
+  </div>
+</div>
+
+<!-- Block detail popup -->
+<div class="modal-overlay" id="blockDetailModal">
+  <div class="modal">
+    <div class="modal__header"><div class="modal__title">Chi tiết ca thủ thuật</div><button class="modal__close" onclick="closeModal('blockDetailModal')">✕</button></div>
+    <div class="modal__body" id="blockDetailBody"></div>
+    <div class="modal__footer">
+      <button class="btn btn--danger btn--sm" id="cancelBlockBtn">Hủy ca này</button>
+      <button class="btn btn--ghost" onclick="closeModal('blockDetailModal')">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/matrix.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSidebar('schedule-matrix');
+    renderTopbar();
+    document.getElementById('matrixDate').value = new Date().toISOString().split('T')[0];
+    initMatrix();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MedLab – AI Procedure Scheduling & Compliance</title>
+<link rel="stylesheet" href="styles/main.css"/>
+<link rel="stylesheet" href="styles/lp.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="lp-nav">
+  <div class="lp-nav__inner">
+    <div class="lp-nav__brand">
+      <div class="lp-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M12 7v5M9.5 10.5l2.5 1.5 2.5-1.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+      <div><span class="lp-nav__name">MedLab</span><span class="lp-nav__tagline">AI Procedure Scheduling & Compliance</span></div>
+    </div>
+    <ul class="lp-nav__links">
+      <li><a href="#features">Tính năng</a></li>
+      <li><a href="#solution">Giải pháp</a></li>
+      <li><a href="#compliance">Tuân thủ BHYT</a></li>
+      <li><a href="#pricing">Bảng giá</a></li>
+      <li><a href="#">Tài nguyên</a></li>
+      <li><a href="#">Liên hệ</a></li>
+    </ul>
+    <div class="lp-nav__cta">
+      <a href="login.html" class="btn-nav-login">Đăng nhập</a>
+      <a href="login.html" class="btn-nav-demo">Dùng thử / Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="lp-hero">
+  <div class="lp-hero__inner">
+    <!-- LEFT copy -->
+    <div class="lp-hero__left">
+      <div class="lp-hero__eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#2563EB" stroke="#2563EB" stroke-width="1.5"/></svg>
+        <span>AI-Powered Medical Procedure Management</span>
+      </div>
+      <h1 class="lp-hero__h1">MedLab: <span class="lp-accent">"An tâm Xuất toán,<br>Vững vàng Uy tín Bệnh viện".</span></h1>
+      <p class="lp-hero__lead">Quản lý Lịch Thủ Thuật Chính Xác.<br>Tuân Thủ Quy Định của Bộ Y Tế &amp; BHYT.</p>
+      <p class="lp-hero__body">Ngành Y Tế đang đối mặt với Áp Lực Kép:</p>
+      <ul class="lp-hero__bullets">
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/></svg> Vừa phải tổi ưu hành chính, giảm thủ công.</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/></svg> Vừa phải đảm bảo tuân thủ chặt chẽ các quy định của Bộ Y tế và BHXH Việt Nam về quản lý và thanh toán BHYT.</li>
+      </ul>
+      <p class="lp-hero__desc">Các sai sót nhỏ trong khâu xếp lịch có thể dẫn đến nguy cơ bị từ chối thanh toán và ảnh hưởng đến uy tín của bệnh viện.</p>
+      <p class="lp-hero__desc">MedLab là nền tảng AI chuyên biệt, đóng vai trò là <strong>"trợ lý thông minh"</strong> giúp Trưởng khoa và Giám đốc Bệnh viện kiểm soát hoàn toàn mọi rủi ro buộc trong thực hiện thủ thuật, mang lại sự an tâm tuyệt đối.</p>
+      <div class="lp-hero__btns">
+        <a href="login.html" class="btn-primary-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          ĐẶT LỊCH DEMO TRỰC TIẾP
+        </a>
+        <a href="#features" class="btn-outline-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          TÌM HIỂU THÊM
+        </a>
+      </div>
+      <p class="lp-hero__note">Hoặc liên hệ ngay với chúng tôi để được tư vấn giải pháp phù hợp với quy mô bệnh viện của bạn.</p>
+    </div>
+    <!-- RIGHT mockup -->
+    <div class="lp-hero__right">
+      <div class="lp-mockup">
+        <div class="lp-mockup__bar">
+          <div class="lp-mockup__dots"><span class="d r"></span><span class="d y"></span><span class="d g"></span></div>
+          <span class="lp-mockup__url">medlab.vn/schedule-matrix</span>
+        </div>
+        <div class="lp-mockup__shell">
+          <!-- mini sidebar -->
+          <div class="lp-mock-sidebar">
+            <div class="lp-mock-logo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/></svg><span>MedLab</span></div>
+            <div class="lp-mock-nav active">Tổng quan</div>
+            <div class="lp-mock-nav">Bệnh nhân</div>
+            <div class="lp-mock-nav">Nhân sự</div>
+            <div class="lp-mock-nav">Thiết bị / Máy</div>
+            <div class="lp-mock-nav">Lịch trình</div>
+            <div class="lp-mock-nav">Phòng / Giường</div>
+            <div class="lp-mock-nav">Báo cáo</div>
+            <div class="lp-mock-nav">Cài lệnh</div>
+          </div>
+          <!-- Gantt content -->
+          <div class="lp-mock-main">
+            <div class="lp-mock-header">
+              <span class="lp-mock-title">Timeline toàn khoa</span>
+              <div class="lp-mock-controls">
+                <button>◀</button><span>21/06/2025</span><button>▶</button>
+                <select style="font-size:10px;padding:1px 4px;border:1px solid #e5e7eb;border-radius:4px"><option>Hôm nay ▼</option></select>
+                <button class="lp-mock-addbtn">+ Thêm lịch</button>
+              </div>
+              <div class="lp-mock-legend">
+                <span class="leg safe">An toàn</span>
+                <span class="leg warn">Cảnh báo</span>
+                <span class="leg col">Xung đột</span>
+                <span class="leg idle">Bổ trợ</span>
+              </div>
+            </div>
+            <!-- Time ruler -->
+            <div class="lp-mock-ruler">
+              <div class="lp-mock-row-label"></div>
+              <div class="lp-mock-ruler-times">
+                <span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span>
+              </div>
+            </div>
+            <!-- Section: Nhân sự -->
+            <div class="lp-mock-section-hdr">NHÂN SỰ</div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">BS. Nguyễn Văn A</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:2%;width:18%">08:00/Sáng – Sáng</div><div class="lp-blk safe" style="left:38%;width:22%">BS. Trần Thanh Tú</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">KTV. Trần Thị B</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:20%">08:00-Hội-trường</div><div class="lp-blk col" style="left:35%;width:16%">⚠ Xung đột</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">KTV &amp; KTV Lê Văn C</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:5%;width:20%">08:25/Hội...</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">DD. Phạm Thị D</div><div class="lp-mock-track"><div class="lp-blk idle" style="left:0%;width:25%">08:00/Sáng – Nghỉ</div></div></div>
+            <!-- Section: Thiết bị -->
+            <div class="lp-mock-section-hdr">THIẾT BỊ</div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Máy Siêu âm-01</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:18%">08:00/31-Sáng</div><div class="lp-blk safe" style="left:40%;width:18%">09:00/11 – Chiều vu</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Máy Siêu âm-02</div><div class="lp-mock-track"><div class="lp-blk warn" style="left:0%;width:16%">08:00/Thủ...</div><div class="lp-blk safe" style="left:38%;width:20%">09:00/11 – Chiều vu</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Máy PPP-01</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:22%">08:00/31 – Sáng</div></div></div>
+            <!-- Section: Phòng/Giường -->
+            <div class="lp-mock-section-hdr">PHÒNG / GIƯỜNG</div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Phòng 101</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:22%">08:00/41 – Sáng+Chiều</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Phòng 102</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:18%">08:00/41 – Sáng+Chiều</div><div class="lp-blk col" style="left:32%;width:18%">⚠ 09:00/41 – Chiều vu</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Phòng 103</div><div class="lp-mock-track"><div class="lp-blk safe" style="left:0%;width:20%">08:00/41 – Chiều vu</div></div></div>
+            <div class="lp-mock-row"><div class="lp-mock-row-label">Phòng 104</div><div class="lp-mock-track"><div class="lp-blk idle" style="left:0%;width:16%">Bổ trợ</div><div class="lp-blk safe" style="left:35%;width:18%">09:00/41 – Chiều vu</div></div></div>
+            <!-- Bottom stats bar -->
+            <div class="lp-mock-statsbar">
+              <span>Ca hôm nay: <strong>156</strong></span>
+              <span class="safe-num">Có lịch an: <strong>132</strong> <em>(85%)</em></span>
+              <span class="warn-num">Cảnh báo: <strong>14</strong> <em>(9%)</em></span>
+              <span class="col-num">Xung đột: <strong>6</strong> <em>(4%)</em></span>
+              <span>Thiếu tài lực: <strong>4</strong></span>
+            </div>
+            <!-- Doctor badge -->
+            <div class="lp-mock-userbadge">
+              <div class="lp-mock-avatar">VA</div>
+              <div><div style="font-size:9px;font-weight:700">BS. Nguyễn Văn A</div><div style="font-size:8px;color:#6b7280">Trưởng khoa PHCN</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 7 LỢI ÍCH ══════════════════ -->
+<section class="lp-benefits" id="features">
+  <div class="lp-container">
+    <h2 class="lp-section-title">7 Lợi ích cốt lõi giúp bệnh viện vận hành an toàn &amp; hiệu quả</h2>
+    <div class="lp-benefits__grid">
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon blue"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div class="lp-benefit-label">Kiểm soát 4 chiều<br><strong>(4D Constraints)</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon green"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="lp-benefit-label">Quản lý Timeline<br><strong>trực quan</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon purple"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="lp-benefit-label">Gợi ý<br><strong>lịch thông minh</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon red"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="lp-benefit-label">Tuân thủ 100%<br><strong>quy định</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg></div>
+        <div class="lp-benefit-label">An toàn dữ liệu<br><strong>&amp; bảo mật</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon teal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="lp-benefit-label">Tối ưu vận hành &amp;<br><strong>hiệu suất</strong></div>
+      </div>
+      <div class="lp-benefit-card">
+        <div class="lp-benefit-icon blue2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <div class="lp-benefit-label">Hỗ trợ chuyên trách<br><strong>24/7</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 4D CONSTRAINTS ══════════════════ -->
+<section class="lp-4d" id="solution">
+  <div class="lp-container">
+    <h2 class="lp-section-title center">MedLab kiểm soát 4 chiều ràng buộc <span class="lp-badge-inline">(4D Constraints)</span></h2>
+    <div class="lp-4d__grid">
+      <div class="lp-4d-card">
+        <div class="lp-4d-num blue">1</div>
+        <div class="lp-4d-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/></svg></div>
+        <h3>An Toàn Nhân Sự<br><span class="lp-4d-sub">(Staff)</span></h3>
+        <p>Hệ thống tự động ngăn chặn việc phân công nhân sự thực hiện đồng thời nhiều ca bệnh, đảm bảo nhân sự không bị "quá tải" và luôn thực thi đủ số lượng ca trực.</p>
+      </div>
+      <div class="lp-4d-card">
+        <div class="lp-4d-num orange">2</div>
+        <div class="lp-4d-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#F59E0B" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Tối ưu Thiết bị<br><span class="lp-4d-sub">(Device)</span></h3>
+        <p>Tự động điều phối việc sử dụng máy móc và giường bệnh, loại bỏ tình trạng trùng lặp thiết bị cho cùng một bệnh nhân và đảm bảo thiết bị luôn sẵn sàng.</p>
+      </div>
+      <div class="lp-4d-card">
+        <div class="lp-4d-num green">3</div>
+        <div class="lp-4d-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#22C55E" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke="#22C55E" stroke-width="2"/></svg></div>
+        <h3>Bảo mật Bệnh nhân<br><span class="lp-4d-sub">(Patient)</span></h3>
+        <p>Xác minh thông tin bệnh nhân, ngăn chặn sai sót y khoa khi hai bệnh nhân trùng tên được xếp lịch vào một khung giờ hoặc một vị trí.</p>
+      </div>
+      <div class="lp-4d-card">
+        <div class="lp-4d-num red">4</div>
+        <div class="lp-4d-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="#EF4444" stroke-width="2"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Chuẩn hóa Quy định<br><span class="lp-4d-sub">(Protocol)</span></h3>
+        <p>Cập nhật và áp dụng đúng thời gian quy định của từng loại thủ thuật theo Bộ Y tế, tự động cộng thêm thời gian chuẩn bị (protocol) để tránh việc thanh toán bị sai sót.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TIMELINE + SMART SLOT ══════════════════ -->
+<section class="lp-features-2col" id="features2">
+  <div class="lp-container">
+    <div class="lp-f2-grid">
+      <!-- Feature 5: Timeline -->
+      <div class="lp-f2-card">
+        <div class="lp-f2-num">5</div>
+        <h3 class="lp-f2-title">Quản lý Timeline Trực quan</h3>
+        <p class="lp-f2-desc">Timeline Trực quan tổng hợp hoạt động của khoa theo thời gian thực, giúp điều phối nhân sự <strong>(đặc biệt là Thứ 7, Chủ nhật)</strong> trở nên dễ dàng và chính xác hơn.</p>
+        <ul class="lp-f2-checks">
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/></svg>Theo dõi lịch nhân sự, thiết bị, phòng/giường theo thời gian thực</li>
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/></svg>Màu sắc cảnh báo rõ ràng: <span class="tag-safe">An toàn</span> · <span class="tag-warn">Cảnh báo</span> · <span class="tag-col">Xung đột</span></li>
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round"/></svg>Chú ý đặc biệt lịch trực Thứ 7, Chủ nhật</li>
+        </ul>
+        <!-- Mini matrix mockup -->
+        <div class="lp-mini-matrix">
+          <div class="lp-mm-row hdr"><span>Nhân viên</span><span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span><span>13:00</span><span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span></div>
+          <div class="lp-mm-row"><span>BS. Văn A</span><div class="lp-mm-track"><div class="lp-mm-blk s" style="left:0;width:22%">Sáng-AN</div><div class="lp-mm-blk c" style="left:33%;width:14%">⚠ Trùng</div><div class="lp-mm-blk s" style="left:60%;width:20%">Chiều-AN</div></div></div>
+          <div class="lp-mm-row"><span>KTV. Trần B</span><div class="lp-mm-track"><div class="lp-mm-blk s" style="left:0;width:25%">Sáng</div><div class="lp-mm-blk s" style="left:50%;width:20%">Chiều</div></div></div>
+          <div class="lp-mm-row"><span>DD. Lê C</span><div class="lp-mm-track"><div class="lp-mm-blk w" style="left:5%;width:30%">Cảnh báo</div><div class="lp-mm-blk s" style="left:55%;width:20%">An toàn</div></div></div>
+          <div class="lp-mm-row"><span>KTV. Nguyễn D</span><div class="lp-mm-track"><div class="lp-mm-blk s" style="left:0;width:20%">Sáng</div><div class="lp-mm-blk s" style="left:38%;width:22%">Chiều</div></div></div>
+          <div class="lp-mm-row"><span>Máy Siêu âm 01</span><div class="lp-mm-track"><div class="lp-mm-blk s" style="left:0;width:18%">BN: Hoa</div><div class="lp-mm-blk s" style="left:30%;width:18%">BN: Minh</div><div class="lp-mm-blk c" style="left:55%;width:15%">⚠ BN: Vân</div></div></div>
+        </div>
+      </div>
+      <!-- Feature 6: Smart Slot -->
+      <div class="lp-f2-card">
+        <div class="lp-f2-num">6</div>
+        <h3 class="lp-f2-title">Gợi ý Lịch thông minh</h3>
+        <p class="lp-f2-desc">Hệ thống gợi ý lịch trống an toàn nhất cho bệnh nhân dựa trên các tham số đầu vào, giúp rút ngắn thời gian chờ đợi của người bệnh và tối ưu hóa công suất của khoa.</p>
+        <!-- Smart slot flow -->
+        <div class="lp-smart-flow">
+          <div class="lp-sf-step">
+            <div class="lp-sf-icon">📋</div>
+            <div class="lp-sf-label">Nhập thông tin bệnh nhân</div>
+          </div>
+          <div class="lp-sf-arrow">→</div>
+          <div class="lp-sf-step">
+            <div class="lp-sf-icon">🔬</div>
+            <div class="lp-sf-label">Chọn thủ thuật &amp; yêu cầu</div>
+          </div>
+          <div class="lp-sf-arrow">→</div>
+          <div class="lp-sf-step">
+            <div class="lp-sf-icon">⚡</div>
+            <div class="lp-sf-label">AI phân tích &amp; đối chiếu 4D</div>
+          </div>
+          <div class="lp-sf-arrow">→</div>
+          <div class="lp-sf-step active">
+            <div class="lp-sf-icon">✅</div>
+            <div class="lp-sf-label">Gợi ý lịch trống an toàn nhất</div>
+          </div>
+        </div>
+        <p class="lp-smart-quote"><em>"AI đã tìm thấy khung giờ an toàn!"</em></p>
+        <div class="lp-smart-result">
+          <div class="lp-sr-row">
+            <div class="lp-sr-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              10:30 – 11:20<br><span>22/06/2025</span>
+            </div>
+            <div class="lp-sr-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/></svg>
+              Máy Siêu âm 01<br><span>Phòng 102</span>
+            </div>
+          </div>
+          <a href="schedule-matrix.html" class="btn-book-now">Đặt lịch ngay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TUÂN THỦ QUY ĐỊNH ══════════════════ -->
+<section class="lp-compliance" id="compliance">
+  <div class="lp-container">
+    <div class="lp-compliance__hdr">
+      <div class="lp-c-num">7</div>
+      <div>
+        <h3 class="lp-c-title">Tuân thủ 100% Quy định</h3>
+        <p class="lp-c-sub">Cam kết đáp ứng đầy đủ các văn bản pháp lý hiện hành</p>
+      </div>
+    </div>
+    <div class="lp-compliance__grid">
+      <div class="lp-comp-card">
+        <div class="lp-comp-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#2563EB" stroke-width="2"/></svg></div>
+        <p><strong>Nghị định 75/2023/NĐ-CP</strong> (sửa đổi, bổ sung Nghị định 146/2018/NĐ-CP) về thanh toán BHYT</p>
+      </div>
+      <div class="lp-comp-card">
+        <div class="lp-comp-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="#2563EB" stroke-width="2"/></svg></div>
+        <p><strong>Thông tư 43/2013/TT-BYT</strong> và Thông tư 21/2017/TT-BYT về quy định phân tuyến chuyên môn kỹ thuật</p>
+      </div>
+      <div class="lp-comp-card">
+        <div class="lp-comp-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <p><strong>Các bộ tiêu chí</strong> chất lượng bệnh viện</p>
+      </div>
+      <div class="lp-comp-card">
+        <div class="lp-comp-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#2563EB" stroke-width="2"/><path d="M8 12h8M8 8h8M8 16h5" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <p><strong>Quy định nội bộ</strong> của bệnh viện và các văn bản liên quan khác</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════ INTEGRATIONS ══════════════════ -->
+<section class="lp-integrations">
+  <div class="lp-container">
+    <h3 class="lp-int-title">Tích hợp linh hoạt với hệ thống hiện có</h3>
+    <div class="lp-int-flow">
+      <div class="lp-int-item"><span class="lp-int-logo vnpt">VNPT HIS</span></div>
+      <div class="lp-int-item"><span class="lp-int-logo viettel">Viettel HIS</span></div>
+      <div class="lp-int-item"><span class="lp-int-logo his">HIS</span></div>
+      <div class="lp-int-item"><span class="lp-int-logo emr">EMR SYSTEM</span></div>
+      <div class="lp-int-arrow">→</div>
+      <div class="lp-int-item highlight">
+        <div class="lp-int-ml-logo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>MedLab</div>
+        <div style="font-size:10px;color:#93C5FD">AI Scheduling Engine</div>
+      </div>
+      <div class="lp-int-arrow">→</div>
+      <div class="lp-int-item bhyt">
+        <div class="lp-int-bhyt-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#22C55E" stroke="#22C55E" stroke-width="1"/></svg></div>
+        <div style="font-size:10px;font-weight:700;color:#fff">BHYT</div>
+        <div style="font-size:9px;color:#86EFAC">CỔNG GIÁM ĐỊNH BẢO HIỂM Y TẾ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CTA FOOTER ══════════════════ -->
+<section class="lp-cta-footer">
+  <div class="lp-container">
+    <div class="lp-cta-inner">
+      <div class="lp-cta-left">
+        <div class="lp-cta-shield">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(37,99,235,0.3)" stroke="#60A5FA" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h2 class="lp-cta-h2">Đừng để những sai sót nhỏ ảnh hưởng đến uy tín lớn<br>của bệnh viện và sự an tâm của người bệnh!</h2>
+          <p class="lp-cta-sub">MedLab đồng hành chuyển đổi sang vận hành: <strong>Chính xác – An toàn – Hợp lệ.</strong></p>
+          <div class="lp-cta-btns">
+            <a href="login.html" class="btn-primary-lg white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              ĐẶT LỊCH DEMO TRỰC TIẾP
+            </a>
+            <a href="#features" class="btn-outline-lg white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              TÌM HIỂU THÊM
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="lp-cta-badges">
+        <div class="lp-cta-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#60A5FA" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Triển khai nhanh</strong><span>2 – 4 tuần</span></div>
+        </div>
+        <div class="lp-cta-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#60A5FA" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#60A5FA" stroke-width="2"/></svg>
+          <div><strong>Dữ liệu bảo mật</strong><span>tuyệt đối</span></div>
+        </div>
+        <div class="lp-cta-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#60A5FA" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#60A5FA" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Đội ngũ hỗ trợ</strong><span>chuyên nghiệp</span></div>
+        </div>
+        <div class="lp-cta-badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#60A5FA" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke="#60A5FA" stroke-width="2"/></svg>
+          <div><strong>Đồng hành cùng</strong><span>bệnh viện lâu dài</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="lp-footer">
+  <div class="lp-container lp-footer__inner">
+    <div class="lp-footer__brand">
+      <div class="lp-logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>
+      <span>MedLab</span>
+    </div>
+    <p>© 2026 MedLab. Tuân thủ TT 43/2013 · TT 21/2017 · NĐ 75/2023. Phiên bản 4.2.0-STABLE</p>
+  </div>
+</footer>
+<script src="js/landing.js"></script>
+</body>
+</html>

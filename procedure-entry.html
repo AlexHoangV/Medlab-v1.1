@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhập Liệu Thủ Thuật – Med Lab</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/app.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar__brand"><div class="sidebar__logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></div><div><div class="sidebar__title">Med Lab</div><div class="sidebar__sub">Hệ thống quản lý</div></div></div>
+    <nav class="sidebar__nav">
+      <a class="nav-item" href="dashboard.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg>Bảng điều khiển</a>
+      <a class="nav-item active" href="calendar.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Thủ tục Y tế<svg class="nav-item__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      <a class="nav-item" href="time-allocation.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Phân bổ thời gian</a>
+    </nav>
+    <div class="sidebar__footer">
+      <a class="nav-item" href="#"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>Cài đặt hệ thống</a>
+      <a class="nav-item" href="#"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>Trợ giúp</a>
+      <a class="nav-item nav-item--danger" href="login.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Đăng xuất</a>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <header class="topbar">
+      <nav class="topbar__breadcrumb">
+        <a href="#">Bệnh viện</a><span class="sep">›</span>
+        <a href="dashboard.html">Dashboard</a><span class="sep">›</span>
+        <span class="current">Tổng quan thủ thuật</span>
+      </nav>
+      <div class="topbar__right">
+        <div class="topbar__search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Tìm kiếm bệnh nhân, thủ thuật..." /></div>
+        <div class="topbar__notif"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="topbar__notif-badge">3</span></div>
+        <div class="topbar__user"><div class="topbar__avatar">VA</div><div class="topbar__user-info"><div class="topbar__user-name">BS. Nguyễn Văn A</div><div class="topbar__user-role">Khoa Ngoại</div></div></div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <!-- Page header -->
+      <div class="pe-header">
+        <div>
+          <h2 class="pe-title">Nhập Liệu Thủ Thuật Y Tế</h2>
+          <p class="pe-sub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Hệ thống quản lý hồ sơ thủ thuật theo Thông tư 43/2013/TT-BYT
+          </p>
+        </div>
+        <div class="pe-header__actions">
+          <button class="btn btn--ghost" onclick="window.location='calendar.html'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Hủy bỏ
+          </button>
+          <button class="btn btn--primary" id="saveBtn" onclick="saveProcedure()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="2"/><polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Lưu hồ sơ
+          </button>
+        </div>
+      </div>
+
+      <!-- Anti-collision live alert -->
+      <div class="collision-status" id="collisionStatus">
+        <div class="collision-status__item safe">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Kiểm tra nhân sự: OK
+        </div>
+        <div class="collision-status__item safe">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Kiểm tra máy: OK
+        </div>
+        <div class="collision-status__item safe">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Kiểm tra bệnh nhân: OK
+        </div>
+        <div class="collision-status__item safe">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Quy chuẩn BYT: OK
+        </div>
+      </div>
+
+      <div class="pe-grid">
+        <!-- LEFT COLUMN -->
+        <div class="pe-left">
+
+          <!-- Patient Info Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="pe-section-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
+                Thông Tin Bệnh Nhân
+              </div>
+            </div>
+            <div class="pe-patient-row">
+              <div class="pe-patient-avatar">
+                <div class="patient-avatar-img">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#9CA3AF" stroke-width="1.5"/><circle cx="12" cy="7" r="4" stroke="#9CA3AF" stroke-width="1.5"/></svg>
+                </div>
+                <div class="patient-pid">PID: 2024-00892</div>
+              </div>
+              <div class="pe-patient-fields">
+                <div class="pe-fields-row">
+                  <div class="form-group" style="flex:2">
+                    <label class="form-label">Họ và tên bệnh nhân <span class="required">*</span></label>
+                    <input class="form-input" type="text" id="patientName" placeholder="Nguyễn Hoàng Bảo Anh" value="Nguyễn Hoàng Bảo Anh" oninput="runCollisionCheck()" />
+                  </div>
+                  <div class="form-group" style="flex:1">
+                    <label class="form-label">Mã số bệnh nhân (PID) <span class="required">*</span></label>
+                    <input class="form-input" type="text" id="patientPID" placeholder="BN99283-HCM" value="BN99283-HCM" />
+                  </div>
+                </div>
+                <div class="pe-fields-row">
+                  <div class="form-group" style="flex:1">
+                    <label class="form-label">Ngày sinh <span class="required">*</span></label>
+                    <input class="form-input" type="date" id="dob" value="1992-05-12" />
+                  </div>
+                  <div class="form-group" style="flex:1">
+                    <label class="form-label">Giới tính <span class="required">*</span></label>
+                    <select class="form-select" id="gender">
+                      <option value="nu" selected>Nữ</option>
+                      <option value="nam">Nam</option>
+                      <option value="khac">Khác</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Procedure Details Card -->
+          <div class="card" style="margin-top:16px">
+            <div class="card-header">
+              <div class="pe-section-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                Chi Tiết Thủ Thuật
+              </div>
+            </div>
+            <div class="pe-fields-row" style="margin-bottom:12px">
+              <div class="form-group" style="flex:1">
+                <label class="form-label">Ngày thực hiện thủ thuật <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2"/></svg>
+                  <input class="form-input input-with-icon" type="date" id="procedureDate" />
+                </div>
+              </div>
+            </div>
+            <div class="pe-fields-row">
+              <div class="form-group" style="flex:1">
+                <label class="form-label">Loại thủ thuật <span class="required">*</span></label>
+                <select class="form-select" id="procedureType" onchange="onProcedureTypeChange(this.value)">
+                  <option value="">-- Chọn thủ thuật --</option>
+                  <option value="noi_soi">Nội soi dạ dày (15 phút)</option>
+                  <option value="mri" selected>Chụp MRI (45 phút)</option>
+                  <option value="ct_scan">Chụp CT Scan (30 phút)</option>
+                  <option value="sieu_am">Siêu âm tim (20 phút)</option>
+                  <option value="parafin">Đắp Parafin (20 phút)</option>
+                  <option value="cham_cuu">Châm cứu (20 phút)</option>
+                  <option value="keo_gian">Kéo giãn cột sống (20 phút)</option>
+                  <option value="bo_bot">Bó bột (30 phút)</option>
+                  <option value="xet_nghiem">Xét nghiệm máu (10 phút)</option>
+                  <option value="xquang">X-Quang (10 phút)</option>
+                </select>
+              </div>
+              <div class="form-group" style="flex:1">
+                <label class="form-label">Thời gian bắt đầu <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <input class="form-input input-with-icon" type="time" id="startTime" value="09:30" oninput="runCollisionCheck()" />
+                </div>
+              </div>
+            </div>
+            <div class="pe-fields-row" style="margin-top:12px">
+              <div class="form-group" style="flex:1">
+                <label class="form-label">Thời gian kết thúc (tự động)</label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <input class="form-input input-with-icon" type="time" id="endTime" value="10:18" readonly style="background:var(--color-gray-50);color:var(--color-primary);font-weight:600" />
+                </div>
+                <div style="font-size:11px;color:var(--color-gray-500);margin-top:3px">= 45 phút + 3 phút đệm BYT</div>
+              </div>
+              <div class="form-group" style="flex:1">
+                <label class="form-label">Phòng thực hiện <span class="required">*</span></label>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span class="room-tag">Phòng Nội Soi 04 – Tầng 2</span>
+                  <label class="checkbox-label" style="font-size:12px">
+                    <input type="checkbox" id="urgentMode" onchange="toggleUrgent(this)" />
+                    <span class="checkmark"></span>
+                    <span style="color:var(--color-danger);font-weight:600">Chế độ ưu tiên (Cấp cứu)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:12px">
+              <label class="form-label">Ghi chú chuyên môn</label>
+              <textarea class="form-textarea" id="notes" placeholder="Ghi chú về tình trạng lâm sàng hoặc lưu ý đặc biệt..."></textarea>
+            </div>
+          </div>
+
+          <!-- Machine Selection -->
+          <div class="card" style="margin-top:16px">
+            <div class="card-header">
+              <div class="pe-section-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                Lựa Chọn Máy Móc
+              </div>
+              <span class="badge badge--green">Đã hiệu chuẩn 15/05/2024</span>
+            </div>
+            <div class="machine-grid" id="machineGrid">
+              <div class="machine-card" onclick="selectMachine(this,'M-ECG-001')">
+                <div class="machine-code">M-ECG-001</div>
+                <div class="machine-name">Máy điện tim 12 kênh</div>
+              </div>
+              <div class="machine-card" onclick="selectMachine(this,'M-US-042')">
+                <div class="machine-code">M-US-042</div>
+                <div class="machine-name">Máy siêu âm màu 4D</div>
+              </div>
+              <div class="machine-card" onclick="selectMachine(this,'M-XRAY-09')">
+                <div class="machine-code">M-XRAY-09</div>
+                <div class="machine-name">Hệ thống X-quang DR</div>
+              </div>
+              <div class="machine-card selected" onclick="selectMachine(this,'M-ENDO-15')">
+                <div class="machine-code">M-ENDO-15</div>
+                <div class="machine-name">Hệ thống nội soi Olympus</div>
+                <div class="machine-sel-dot"></div>
+              </div>
+              <div class="machine-card" onclick="selectMachine(this,'M-MRI-01')">
+                <div class="machine-code">M-MRI-01</div>
+                <div class="machine-name">MRI Siemens Skyra</div>
+              </div>
+              <div class="machine-card busy" title="Đang bận">
+                <div class="machine-code">M-CT-02</div>
+                <div class="machine-name">CT Scanner Philips</div>
+                <div style="font-size:10px;color:var(--color-danger);margin-top:4px">⚠ Đang dùng</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom stats bar -->
+          <div class="pe-stats-bar">
+            <div class="pe-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="pe-stat-label">Thủ thuật hôm nay</span><span class="pe-stat-val">24</span></div>
+            <div class="pe-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="pe-stat-label">Ca cấp cứu chờ xử lý</span><span class="pe-stat-val" style="color:var(--color-danger)">02</span></div>
+            <div class="pe-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/></svg><span class="pe-stat-label">Thiết bị khả dụng</span><span class="pe-stat-val" style="color:var(--color-success)">85%</span></div>
+            <div class="pe-stat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="pe-stat-label">Trung bình thời gian</span><span class="pe-stat-val">45p</span></div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Team composition + Compliance -->
+        <div class="pe-right">
+          <!-- Team -->
+          <div class="card">
+            <div class="card-header">
+              <div class="pe-section-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                Thành Phần Tham Gia
+              </div>
+              <span class="badge badge--gray">3 / 10</span>
+            </div>
+
+            <div class="team-section">
+              <div class="team-label">Bác sĩ chính <span class="required">*</span></div>
+              <div class="team-main-doctor">
+                <div class="staff-avatar" style="background:linear-gradient(135deg,#2563EB,#7C3AED)">VA</div>
+                <div>
+                  <div style="font-weight:600;font-size:14px">BS. Nguyễn Văn A</div>
+                  <div style="font-size:11px;color:var(--color-gray-500)">Bác sĩ điều trị – Trưởng khoa</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="team-section" style="margin-top:16px">
+              <div class="team-label" style="display:flex;align-items:center;justify-content:space-between">
+                Nhân viên phụ trợ
+                <button class="btn btn--ghost btn--sm" onclick="addTeamMember()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                  Thêm mới
+                </button>
+              </div>
+              <div id="teamList">
+                <div class="team-member" data-id="1">
+                  <div class="staff-avatar" style="width:32px;height:32px;font-size:11px;background:linear-gradient(135deg,#059669,#10B981)">TB</div>
+                  <div class="team-member__info">
+                    <input class="team-member__name" type="text" value="Điều dưỡng Trần Thị B" oninput="runCollisionCheck()" />
+                    <div class="team-member__role">Phụ tá 1</div>
+                  </div>
+                  <button class="icon-btn text-danger" onclick="removeTeamMember(1)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  </button>
+                </div>
+                <div class="team-member" data-id="2">
+                  <div class="staff-avatar" style="width:32px;height:32px;font-size:11px;background:linear-gradient(135deg,#D97706,#F59E0B)">VC</div>
+                  <div class="team-member__info">
+                    <input class="team-member__name" type="text" value="Kỹ thuật viên Lê Văn C" oninput="runCollisionCheck()" />
+                    <div class="team-member__role">Vận hành máy</div>
+                  </div>
+                  <button class="icon-btn text-danger" onclick="removeTeamMember(2)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Empty slots for up to 9 additional members -->
+              <div class="team-empty-slots" id="emptySlots">
+                <div class="team-empty-slot" onclick="addTeamMember()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                  Thêm điều dưỡng / hộ lý...
+                </div>
+                <div class="team-empty-slot" onclick="addTeamMember()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                  Thêm KTV / bác sĩ phụ...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compliance checklist -->
+          <div class="card" style="margin-top:16px">
+            <div class="card-title" style="margin-bottom:12px">Tuân thủ Quy trình Y tế</div>
+            <div class="compliance-checks" id="complianceChecks">
+              <div class="check-item" id="chk-pid">
+                <svg class="check-icon safe" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Đối soát mã PID chính xác
+              </div>
+              <div class="check-item" id="chk-device">
+                <svg class="check-icon safe" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Thiết bị trong thời hạn hiệu chuẩn
+              </div>
+              <div class="check-item" id="chk-staff">
+                <svg class="check-icon safe" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Đủ số lượng nhân sự chuyên môn
+              </div>
+              <div class="check-item" id="chk-time">
+                <svg class="check-icon safe" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Thời lượng ≥ định mức BYT + 3p đệm
+              </div>
+              <div class="check-item" id="chk-collision">
+                <svg class="check-icon safe" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Không trùng lịch (Anti-Collision 4D)
+              </div>
+            </div>
+          </div>
+
+          <!-- Smart slot suggestion -->
+          <div class="card card--blue" style="margin-top:16px">
+            <div class="card-title" style="color:var(--color-primary);margin-bottom:8px">
+              ⚡ Đề xuất khung giờ sạch
+            </div>
+            <p style="font-size:12px;color:var(--color-gray-600);margin-bottom:12px">AI tự động tìm 3 khung giờ tốt nhất cho ca này:</p>
+            <div class="slot-suggestions" id="slotSuggestions">
+              <div class="slot-item active" onclick="selectSlot(this,'09:30','10:18')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                09:30 – 10:18 <span class="slot-safe">An toàn</span>
+              </div>
+              <div class="slot-item" onclick="selectSlot(this,'11:00','11:48')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                11:00 – 11:48 <span class="slot-safe">An toàn</span>
+              </div>
+              <div class="slot-item" onclick="selectSlot(this,'14:00','14:48')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                14:00 – 14:48 <span class="slot-safe">An toàn</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Add team member modal -->
+<div class="modal-overlay" id="addMemberModal">
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title">Thêm nhân viên tham gia</div>
+      <button class="modal__close" onclick="closeModal('addMemberModal')">✕</button>
+    </div>
+    <div class="modal__body">
+      <div class="form-group">
+        <label class="form-label">Tên nhân viên <span class="required">*</span></label>
+        <input class="form-input" type="text" id="newMemberName" placeholder="BS. / KTV. / DD. / HL." />
+      </div>
+      <div class="form-group" style="margin-top:12px">
+        <label class="form-label">Vai trò</label>
+        <select class="form-select" id="newMemberRole">
+          <option>Bác sĩ phụ</option><option>Kỹ thuật viên</option><option>Điều dưỡng</option><option>Hộ lý</option>
+        </select>
+      </div>
+      <div class="alert-box alert-box--warn" style="margin-top:16px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Hệ thống sẽ tự kiểm tra xung đột lịch của nhân viên này sau khi thêm.
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" onclick="closeModal('addMemberModal')">Hủy</button>
+      <button class="btn btn--primary" onclick="confirmAddMember()">Thêm & kiểm tra</button>
+    </div>
+  </div>
+</div>
+
+<!-- Save success modal -->
+<div class="modal-overlay" id="saveSuccessModal">
+  <div class="modal">
+    <div class="modal__header"><div class="modal__title">✅ Lưu hồ sơ thành công</div><button class="modal__close" onclick="closeModal('saveSuccessModal')">✕</button></div>
+    <div class="modal__body">
+      <div class="alert-box alert-box--success">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Hồ sơ thủ thuật đã qua kiểm tra 4D Anti-Collision và được lưu thành công. Dữ liệu sẵn sàng đẩy lên cổng BHYT.
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--ghost" onclick="closeModal('saveSuccessModal')">Tiếp tục nhập</button>
+      <button class="btn btn--primary" onclick="window.location='calendar.html'">Về lịch trình</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/procedure.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSidebar('calendar');
+    renderTopbar();
+    // Populate procedure types from PROCEDURE_DICT
+    const sel = document.getElementById('procedureType');
+    if (sel) {
+      sel.innerHTML = '<option value="">-- Chọn thủ thuật --</option>' +
+        PROCEDURE_DICT.map(p => `<option value="${p.id}" data-dur="${p.durationMin}" data-type="${p.type}">${p.name} (${p.durationMin}p) – ${p.type==='ONE_TO_ONE'?'1:1':'1-Nhiều'}</option>`).join('');
+    }
+    // Populate machine select from MACHINES_DB
+    const msel = document.querySelector('#machineGrid');
+    if (msel) {
+      msel.innerHTML = MACHINES_DB.filter(m=>m.status==='ACTIVE').slice(0,6).map(m =>
+        `<div class="machine-card" onclick="selectMachine(this,'${m.maMay}')" data-machine-id="${m.id}">
+          <div class="machine-code">${m.maMay}</div>
+          <div class="machine-name">${m.tenTB}</div>
+        </div>`).join('');
+    }
+    onProcedureTypeChange('mri');
+    runCollisionCheck();
+  });
+</script>
+</html>
