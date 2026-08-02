@@ -1,15 +1,33 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/dashboard", "destination": "/dashboard.html" },
-    { "source": "/calendar", "destination": "/calendar.html" },
-    { "source": "/patient-management", "destination": "/patient-management.html" },
-    { "source": "/staff-management", "destination": "/staff-management.html" },
-    { "source": "/machine-management", "destination": "/machine-management.html" },
-    { "source": "/procedure-entry", "destination": "/procedure-entry.html" },
-    { "source": "/schedule-matrix", "destination": "/schedule-matrix.html" },
-    { "source": "/time-allocation", "destination": "/time-allocation.html" },
-    { "source": "/login", "destination": "/login.html" },
-    { "source": "/api/(.*)", "destination": "/api/index.js" }
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "styles/**",
+          "js/**",
+          "*.html",
+          "medlab_db.json",
+          "logo.svg",
+          "assets/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/dashboard", "destination": "/dashboard.html" },
+    { "src": "/calendar", "destination": "/calendar.html" },
+    { "src": "/patient-management", "destination": "/patient-management.html" },
+    { "src": "/staff-management", "destination": "/staff-management.html" },
+    { "src": "/machine-management", "destination": "/machine-management.html" },
+    { "src": "/procedure-entry", "destination": "/procedure-entry.html" },
+    { "src": "/schedule-matrix", "destination": "/schedule-matrix.html" },
+    { "src": "/time-allocation", "destination": "/time-allocation.html" },
+    { "src": "/login", "destination": "/login.html" },
+    { "src": "/api/(.*)", "destination": "/api/index.js" },
+    { "src": "/(.*)", "destination": "/api/index.js" }
   ]
 }
