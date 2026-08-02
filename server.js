@@ -1,10 +1,9 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import { createServer as createViteServer } from 'vite';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = process.cwd();
 
 const app = express();
 const PORT = 3000;
@@ -330,31 +329,26 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files from root directory
-app.use(express.static(__dirname));
-
-// Fallback to index.html for root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Fallback for 404 - serve index.html or dashboard
-app.use((req, res) => {
-  if (req.accepts('html')) {
-    const defaultPage = fs.existsSync(path.join(__dirname, 'index.html'))
-      ? path.join(__dirname, 'index.html')
-      : path.join(__dirname, 'dashboard.html');
-    res.sendFile(defaultPage);
+// Vite middleware setup
+async function startApp() {
+  if (process.env.NODE_ENV !== 'production') {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'spa',
+    });
+    app.use(vite.middlewares);
   } else {
-    res.status(404).json({ error: 'Not Found' });
+    const distPath = path.join(__dirname, 'dist');
+    app.use(express.static(distPath));
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
   }
-});
 
-if (!process.env.VERCEL) {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`✅ MedLab AI server & REST API running at http://0.0.0.0:${PORT}`);
   });
 }
 
-export default app;
+startApp();
 
