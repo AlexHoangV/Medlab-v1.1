@@ -1,9 +1,7 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/dist/assets/$1" },
-    { "source": "/js/(.*)", "destination": "/dist/js/$1" },
-    { "source": "/styles/(.*)", "destination": "/dist/styles/$1" },
-    { "source": "/(.*)", "destination": "/dist/server.cjs" }
+    { "source": "/api/(.*)", "destination": "/api/index.cjs" },
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }

@@ -351,10 +351,16 @@ async function startApp() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`✅ MedLab AI server & REST API running at http://0.0.0.0:${PORT}`);
   });
 }
 
-startApp();
+// Export app for Vercel
+export default app;
+
+// Start server for local development
+if (!process.env.VERCEL) {
+  startApp();
+}
 
