@@ -1,152 +1,244 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Quản Lý Nhân Sự – Med Lab</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Quản Lý Nhân Sự – Med Lab AI</title>
   <link rel="stylesheet" href="styles/main.css"/>
   <link rel="stylesheet" href="styles/app.css"/>
-  <link rel="stylesheet" href="styles/modules.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
 <body>
 <div class="app-layout">
-
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar"></aside>
 
   <div class="main-content">
+    <!-- TOPBAR -->
     <header class="topbar" id="topbar"></header>
 
-    <main class="page-content">
-      <!-- Sync proposal banner -->
-      <div class="sync-panel">
-        <div class="sync-panel__title">🔗 Đề xuất Sync dữ liệu — Thay thế Google Sheet</div>
-        <div class="sync-panel__sub">Không cần mở Sheet nữa. Mọi thao tác Thêm/Bớt/Chuyển nhượng đều thực hiện ngay trên Med Lab.</div>
-        <div class="sync-options">
-          <div class="sync-option">
-            <div class="sync-option__icon">📥</div>
-            <div class="sync-option__title">Import từ Sheet</div>
-            <div class="sync-option__desc">Nhập CSV/Excel từ Google Sheet để seed dữ liệu ban đầu một lần duy nhất.</div>
-            <span class="sync-option__badge sync-option__badge--blue">Một lần</span>
-          </div>
-          <div class="sync-option">
-            <div class="sync-option__icon">⚡</div>
-            <div class="sync-option__title">Booking trực tiếp</div>
-            <div class="sync-option__desc">Điều dưỡng/KTV đặt lịch ngay trên Web App. Hệ thống kiểm tra 4D Anti-Collision realtime.</div>
-            <span class="sync-option__badge sync-option__badge--green">Khuyến nghị</span>
-          </div>
-          <div class="sync-option">
-            <div class="sync-option__icon">📤</div>
-            <div class="sync-option__title">Xuất XML/CSV BHYT</div>
-            <div class="sync-option__desc">Cuối ngày/tuần xuất dữ liệu đã kiểm toán để đẩy lên cổng BHYT Quốc gia.</div>
-            <span class="sync-option__badge sync-option__badge--yellow">Tự động</span>
-          </div>
-        </div>
+    <main class="page-body" style="padding: 24px;">
+      <!-- Breadcrumb & Page Header -->
+      <div style="font-size:12px; color:var(--color-gray-500); margin-bottom:8px;">
+        Bệnh viện &nbsp;/&nbsp; <span style="color:var(--color-gray-800); font-weight:500;">Med Lab - Khoa VLTL</span>
       </div>
 
-      <!-- Page header -->
-      <div class="page-header">
-        <div class="page-header__left">
-          <h2>Quản Lý Nhân Sự</h2>
-          <p>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg>
-            Thêm / bớt bác sĩ, KTV, điều dưỡng theo ngày. Cảnh báo chuyển nhượng tự động.
-          </p>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px;">
+        <div>
+          <h1 style="font-size:24px; font-weight:700; color:var(--color-gray-900); margin-bottom:4px;">Quản lý nhân sự</h1>
+          <p style="font-size:13px; color:var(--color-gray-500);">Theo dõi danh sách đội ngũ y tế, hiệu suất và phân công lịch trực khoa VLTL.</p>
         </div>
-        <div class="page-header__actions">
-          <input type="date" id="workDate" class="form-input" style="width:160px"/>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn--ghost" onclick="showToast('Đang xuất báo cáo nhân sự...', 'info')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Xuất báo cáo
+          </button>
           <button class="btn btn--primary" onclick="openModal('addStaffModal')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-            Thêm nhân sự
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Thêm nhân sự mới
           </button>
         </div>
       </div>
 
-      <!-- Summary row -->
-      <div class="patient-status-row" id="staffSummary"></div>
-
-      <!-- Filter bar -->
-      <div class="filter-bar">
-        <div class="topbar__search" style="min-width:260px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="text" id="staffSearch" placeholder="Tìm kiếm nhân sự..." oninput="renderStaffGrid()"/>
+      <!-- Stats Cards Row (4 cards) -->
+      <div class="stats-row" style="margin-bottom:24px; display:grid; grid-template-columns: repeat(4, 1fr); gap:16px;">
+        <div class="stat-card" style="background:#fff; border:1px solid var(--color-gray-200); border-radius:12px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase; letter-spacing:0.5px;">Tổng nhân sự</div>
+            <div style="width:36px; height:36px; background:#EFF6FF; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div style="font-size:32px; font-weight:800; color:var(--color-gray-900);">124</div>
         </div>
-        <select class="form-select" id="roleFilter" onchange="renderStaffGrid()" style="width:180px">
-          <option value="">Tất cả vai trò</option>
-          <option value="DOCTOR">Bác sĩ</option>
-          <option value="TECHNICIAN">Kỹ thuật viên</option>
-          <option value="NURSE">Điều dưỡng</option>
-        </select>
-        <select class="form-select" id="statusFilter" onchange="renderStaffGrid()" style="width:160px">
-          <option value="">Tất cả trạng thái</option>
-          <option value="active">Đang trực</option>
-          <option value="absent">Vắng mặt</option>
-        </select>
+
+        <div class="stat-card" style="background:#fff; border:1px solid var(--color-gray-200); border-radius:12px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase; letter-spacing:0.5px;">Đang trực ca</div>
+            <div style="width:36px; height:36px; background:#F0FDF4; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#16A34A" stroke-width="2"/><polyline points="12 6 12 12 16 14" stroke="#16A34A" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div style="font-size:32px; font-weight:800; color:var(--color-gray-900);">42</div>
+        </div>
+
+        <div class="stat-card" style="background:#fff; border:1px solid var(--color-gray-200); border-radius:12px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase; letter-spacing:0.5px;">Ca chờ duyệt</div>
+            <div style="width:36px; height:36px; background:#FFFBEB; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D97706" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="12" stroke="#D97706" stroke-width="2"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="#D97706" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div style="font-size:32px; font-weight:800; color:var(--color-gray-900);">08</div>
+        </div>
+
+        <div class="stat-card" style="background:#fff; border:1px solid var(--color-gray-200); border-radius:12px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase; letter-spacing:0.5px;">Hiệu suất TB</div>
+            <div style="width:36px; height:36px; background:#F5F3FF; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#7C3AED" stroke-width="2"/><polyline points="22 4 12 14.01 9 11.01" stroke="#7C3AED" stroke-width="2"/></svg>
+            </div>
+          </div>
+          <div style="font-size:32px; font-weight:800; color:var(--color-gray-900);">94.2%</div>
+        </div>
       </div>
 
-      <!-- Staff grid -->
-      <div class="staff-grid" id="staffGrid"></div>
+      <!-- Tabs and Search Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-gray-200); margin-bottom:20px;">
+        <div style="display:flex; gap:24px;">
+          <button id="tab-list" style="padding:10px 0; font-size:14px; font-weight:600; color:var(--color-primary); border-bottom:2px solid var(--color-primary); background:none; border-top:none; border-left:none; border-right:none; cursor:pointer;" onclick="switchTab('list')">Danh sách nhân viên</button>
+          <button id="tab-schedule" style="padding:10px 0; font-size:14px; font-weight:600; color:var(--color-gray-500); background:none; border:none; cursor:pointer;" onclick="switchTab('schedule')">Lịch phân công tuần</button>
+          <button id="tab-performance" style="padding:10px 0; font-size:14px; font-weight:600; color:var(--color-gray-500); background:none; border:none; cursor:pointer;" onclick="switchTab('performance')">Đánh giá hiệu suất</button>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+          <div style="position:relative; width:260px;">
+            <svg style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--color-gray-400);" width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="text" placeholder="Tìm theo tên, ID hoặc chức vụ..." style="width:100%; padding:8px 12px 8px 36px; border:1px solid var(--color-gray-200); border-radius:8px; font-size:13px; outline:none;" id="staffTableSearch" oninput="filterStaffTable(this.value)" />
+          </div>
+          <button class="icon-btn" style="border:1px solid var(--color-gray-200); border-radius:8px; width:38px; height:38px; display:flex; align-items:center; justify-content:center; background:#fff;" onclick="showToast('Bộ lọc nâng cao', 'info')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="icon-btn" style="border:1px solid var(--color-gray-200); border-radius:8px; width:38px; height:38px; display:flex; align-items:center; justify-content:center; background:#fff;" onclick="showToast('Sắp xếp nhân sự', 'info')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M11 5H6M17 9H6M21 13H6M15 17H6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
 
-      <!-- Audit log -->
-      <div class="card" style="margin-top:8px">
-        <div class="card-header">
-          <div class="card-title">Nhật ký chuyển nhượng (Audit Log)</div>
-          <button class="btn btn--ghost btn--sm" onclick="renderAuditLog()">Làm mới</button>
+      <!-- Staff Content Sections -->
+      <div id="content-list" class="tab-content">
+        <!-- Staff Table Card -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="table-wrap">
+            <table class="data-table" style="width:100%; border-collapse:collapse; text-align:left;">
+              <thead>
+                <tr style="background:var(--color-gray-50); border-bottom:1px solid var(--color-gray-200); font-size:12px; color:var(--color-gray-500); text-transform:uppercase;">
+                  <th style="padding:14px 16px;">Nhân viên</th>
+                  <th style="padding:14px 16px;">Chức vụ</th>
+                  <th style="padding:14px 16px;">Chuyên môn</th>
+                  <th style="padding:14px 16px;">Ca hiện tại</th>
+                  <th style="padding:14px 16px;">Trạng thái</th>
+                  <th style="padding:14px 16px; text-align:right;">Hành động</th>
+                </tr>
+              </thead>
+              <tbody style="font-size:13px; color:var(--color-gray-800);">
+              <tr style="border-bottom:1px solid var(--color-gray-100);">
+                <td style="padding:14px 16px;">
+                  <div style="display:flex; align-items:center; gap:12px;">
+                    <div style="width:38px; height:38px; border-radius:50%; background:#EFF6FF; color:#2563EB; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px;">VA</div>
+                    <div>
+                      <div style="font-weight:600;">BS. Nguyễn Văn A</div>
+                      <div style="font-size:11px; color:var(--color-gray-500);">STF-001</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:14px 16px; font-weight:500;">Trưởng khoa Ngoại</td>
+                <td style="padding:14px 16px; color:var(--color-gray-600);">Xét nghiệm máu</td>
+                <td style="padding:14px 16px;">
+                  <div style="font-weight:500;">Sáng (07:00 - 15:00)</div>
+                  <div style="font-size:11px; color:var(--color-gray-500);">✉ vana.nguyen@medlab.vn</div>
+                </td>
+                <td style="padding:14px 16px;">
+                  <span style="background:#FEF2F2; color:#DC2626; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600;">● Bận</span>
+                </td>
+                <td style="padding:14px 16px; text-align:right;">
+                  <div style="display:flex; gap:8px; justify-content:flex-end;">
+                    <button class="icon-btn" onclick="showToast('Xem lịch trực BS. Nguyễn Văn A', 'info')" title="Lịch trực">📅</button>
+                    <button class="icon-btn" onclick="showToast('Thao tác thêm...', 'info')">⋮</button>
+                  </div>
+                </td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-gray-100);">
+                <td style="padding:14px 16px;">
+                  <div style="display:flex; align-items:center; gap:12px;">
+                    <div style="width:38px; height:38px; border-radius:50%; background:#F0FDF4; color:#16A34A; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px;">LB</div>
+                    <div>
+                      <div style="font-weight:600;">ĐD. Lê Thị Bình</div>
+                      <div style="font-size:11px; color:var(--color-gray-500);">STF-002</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:14px 16px; font-weight:500;">Điều dưỡng trưởng</td>
+                <td style="padding:14px 16px; color:var(--color-gray-600);">Hỗ trợ lâm sàng</td>
+                <td style="padding:14px 16px;">
+                  <div style="font-weight:500;">Hành chính (08:00 - 17:00)</div>
+                  <div style="font-size:11px; color:var(--color-gray-500);">✉ binhle@medlab.vn</div>
+                </td>
+                <td style="padding:14px 16px;">
+                  <span style="background:#F0FDF4; color:#16A34A; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600;">● Sẵn sàng</span>
+                </td>
+                <td style="padding:14px 16px; text-align:right;">
+                  <div style="display:flex; gap:8px; justify-content:flex-end;">
+                    <button class="icon-btn" onclick="showToast('Xem lịch trực ĐD. Lê Thị Bình', 'info')" title="Lịch trực">📅</button>
+                    <button class="icon-btn" onclick="showToast('Thao tác thêm...', 'info')">⋮</button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div id="auditLogWrap">
-          <div class="empty-state"><div class="empty-state__icon">📋</div><div class="empty-state__title">Chưa có thao tác chuyển nhượng</div><div class="empty-state__sub">Lịch sử sẽ xuất hiện khi có nhân sự nghỉ và cần chuyển nhượng.</div></div>
-        </div>
+      </div>
+      <div id="content-schedule" class="tab-content" style="display:none; padding: 20px; background: white; border-radius: 12px; border: 1px solid #e5e7eb;">
+        <h3>Lịch phân công tuần</h3>
+        <p>Tính năng đang được phát triển...</p>
+      </div>
+      <div id="content-performance" class="tab-content" style="display:none; padding: 20px; background: white; border-radius: 12px; border: 1px solid #e5e7eb;">
+        <h3>Đánh giá hiệu suất</h3>
+        <p>Tính năng đang được phát triển...</p>
+      </div>
+
+      <!-- Made with Visily footer badge -->
+      <div style="text-align:right; font-size:12px; color:var(--color-gray-400); margin-top:20px;">
+        Made with 💜 Visily
       </div>
     </main>
   </div>
 </div>
 
-<!-- Add Staff Modal -->
-<div class="modal-overlay" id="addStaffModal">
-  <div class="modal">
-    <div class="modal__header"><div class="modal__title">Thêm nhân sự mới</div><button class="modal__close" onclick="closeModal('addStaffModal')">✕</button></div>
-    <div class="modal__body">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Họ và tên <span style="color:red">*</span></label><input class="form-input" id="newName" placeholder="VD: Nguyễn Thị Lan Anh"/></div>
-        <div class="form-group"><label class="form-label">Tên ngắn (hiển thị lịch)</label><input class="form-input" id="newShortName" placeholder="LAN ANH"/></div>
-      </div>
-      <div class="form-row" style="margin-top:12px">
-        <div class="form-group"><label class="form-label">Vai trò <span style="color:red">*</span></label>
-          <select class="form-select" id="newRole">
-            <option value="DOCTOR">Bác sĩ</option>
-            <option value="TECHNICIAN" selected>Kỹ thuật viên</option>
-            <option value="NURSE">Điều dưỡng</option>
-          </select>
+<!-- Modal Thêm nhân sự mới -->
+<div class="modal-overlay" id="addStaffModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:999; display:none; align-items:center; justify-content:center;">
+  <div class="modal-card" style="background:#fff; width:100%; max-width:600px; border-radius:12px; padding:24px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <h3 style="font-size:18px; font-weight:700;">Thêm nhân sự mới khoa VLTL</h3>
+      <button class="icon-btn" onclick="closeModal('addStaffModal')">×</button>
+    </div>
+    <form onsubmit="handleStaffSubmit(event)">
+      <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:20px;">
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:16px;">
+          <div>
+            <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Họ và tên *</label>
+            <input type="text" id="newStaffName" required placeholder="Ví dụ: BS. Trần Văn B" style="width:100%; padding:10px; border:1px solid var(--color-gray-300); border-radius:8px;" />
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Mã nhân viên *</label>
+            <input type="text" id="newStaffId" required value="STF-005" style="width:100%; padding:10px; border:1px solid var(--color-gray-300); border-radius:8px;" />
+          </div>
         </div>
-        <div class="form-group"><label class="form-label">Chuyên môn</label><input class="form-input" id="newSpecialty" placeholder="VD: Điện châm, Xoa bóp..."/></div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+          <div>
+            <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Chức vụ</label>
+            <select id="newStaffRole" style="width:100%; padding:10px; border:1px solid var(--color-gray-300); border-radius:8px;">
+              <option value="Bác sĩ">Bác sĩ</option>
+              <option value="Điều dưỡng">Điều dưỡng</option>
+              <option value="Kỹ thuật viên Lab">Kỹ thuật viên Lab</option>
+              <option value="Chuyên gia xét nghiệm">Chuyên gia xét nghiệm</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Chuyên môn</label>
+            <input type="text" id="newStaffSpec" placeholder="Ví dụ: Phục hồi chức năng" style="width:100%; padding:10px; border:1px solid var(--color-gray-300); border-radius:8px;" />
+          </div>
+        </div>
+        <div>
+          <label style="display:block; font-size:12px; font-weight:600; margin-bottom:6px;">Email công việc</label>
+          <input type="email" id="newStaffEmail" placeholder="nhansu@medlab.vn" style="width:100%; padding:10px; border:1px solid var(--color-gray-300); border-radius:8px;" />
+        </div>
       </div>
-    </div>
-    <div class="modal__footer">
-      <button class="btn btn--ghost" onclick="closeModal('addStaffModal')">Hủy</button>
-      <button class="btn btn--primary" onclick="addStaff()">Thêm nhân sự</button>
-    </div>
-  </div>
-</div>
-
-<!-- Transfer Modal -->
-<div class="modal-overlay" id="transferModal">
-  <div class="modal" style="max-width:640px">
-    <div class="modal__header">
-      <div class="modal__title" id="transferTitle">Chuyển nhượng thủ thuật</div>
-      <button class="modal__close" onclick="closeModal('transferModal')">✕</button>
-    </div>
-    <div class="modal__body">
-      <div class="alert-box alert-box--warn" id="transferAlert" style="margin-bottom:16px"></div>
-      <div id="transferList" class="transfer-list"></div>
-      <div class="form-group" style="margin-top:16px">
-        <label class="form-label">Nhân sự thay thế cho TẤT CẢ <span style="color:red">*</span></label>
-        <select class="form-select" id="bulkReplacement"></select>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn--ghost" onclick="closeModal('addStaffModal')">Hủy</button>
+        <button type="submit" class="btn btn--primary">Lưu nhân sự</button>
       </div>
-    </div>
-    <div class="modal__footer">
-      <button class="btn btn--ghost" onclick="closeModal('transferModal')">Hủy – Giữ nguyên</button>
-      <button class="btn btn--primary" onclick="confirmTransfer()">Xác nhận chuyển nhượng</button>
-    </div>
+    </form>
   </div>
 </div>
 
@@ -158,10 +250,60 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderSidebar('staff-management');
     renderTopbar();
-    document.getElementById('workDate').value = new Date().toISOString().split('T')[0];
-    renderStaffGrid();
-    renderStaffSummary();
+    renderStaffTable();
   });
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('button[id^="tab-"]').forEach(btn => {
+      btn.style.color = 'var(--color-gray-500)';
+      btn.style.borderBottom = 'none';
+    });
+    document.getElementById('content-' + tab).style.display = 'block';
+    document.getElementById('tab-' + tab).style.color = 'var(--color-primary)';
+    document.getElementById('tab-' + tab).style.borderBottom = '2px solid var(--color-primary)';
+  }
+
+  function handleStaffSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('newStaffName').value.trim();
+    const role = document.getElementById('newStaffRole').value;
+    const specialty = document.getElementById('newStaffSpec').value.trim() || 'Vật lý trị liệu';
+    const email = document.getElementById('newStaffEmail').value.trim();
+
+    if (!name) {
+      showToast('Vui lòng nhập họ và tên nhân sự', 'warn');
+      return;
+    }
+
+    const newId = STAFF_DB.length > 0 ? Math.max(...STAFF_DB.map(s => s.id)) + 1 : 1;
+    const newStaff = {
+      id: newId,
+      fullName: name,
+      role: role === 'Bác sĩ' ? 'DOCTOR' : 'TECHNICIAN',
+      specialty: specialty,
+      isActive: true,
+      color: '#2563EB',
+      initials: name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+    };
+
+    STAFF_DB.push(newStaff);
+    if (typeof persistData === 'function') persistData();
+    renderStaffTable();
+    showToast('Đã thêm thành công nhân sự mới: ' + name, 'success');
+    closeModal('addStaffModal');
+    document.getElementById('newStaffName').value = '';
+    document.getElementById('newStaffSpec').value = '';
+  }
+
+  function filterStaffTable(query) {
+    const rows = document.querySelectorAll('.data-table tbody tr');
+    query = query.toLowerCase();
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(query) ? '' : 'none';
+    });
+  }
 </script>
 </body>
 </html>

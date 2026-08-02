@@ -506,6 +506,13 @@
 }
 .ta-notice__check svg { flex-shrink: 0; margin-top: 1px; color: #86EFAC; }
 
+.dark {
+  --color-bg-body: #111827;
+  --color-bg-card: #1F2937;
+  --color-text-main: #F9FAFB;
+  background-color: var(--color-bg-body) !important;
+  color: var(--color-text-main) !important;
+}
 /* ══════════════════════════
    TIMELINE / GANTT
 ══════════════════════════ */
@@ -543,3 +550,12 @@
 .tl-legend-item { font-size: 11px; color: var(--color-gray-500); }
 .tl-legend-item.safe { color: #059669; }
 .tl-legend-item.warn { color: var(--color-danger); }
+
+.modal-overlay {
+  display: none;
+}
+.modal-overlay.open {
+  display: flex !important;
+}
+
+.dark .card, .dark .stat-card, .dark .modal, .dark .modal-card { background: var(--color-bg-card) !important; color: var(--color-text-main) !important; }

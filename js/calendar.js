@@ -76,9 +76,10 @@ function renderCalendar() {
       const dateKey = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(cell.day).padStart(2,'0')}`;
       const staticEvents = CALENDAR_EVENTS[dateKey] || [];
       const dbEvents = (typeof SCHEDULES_DB !== 'undefined' ? SCHEDULES_DB : []).filter(s => s.date === dateKey).map(s => {
-        const pt = (typeof PATIENTS_DB !== 'undefined' ? PATIENTS_DB.find(p => p.id === s.patientId) : null);
+        const patientId = Number(s.patientId);
+        const pt = (typeof PATIENTS_DB !== 'undefined' ? PATIENTS_DB.find(p => p.id === patientId) : null);
         return {
-          text: `${s.start} – ${pt ? pt.fullName : 'BN #' + s.patientId}`,
+          text: `${s.start} – ${pt && pt.fullName ? pt.fullName : 'BN #' + s.patientId}`,
           type: s.type === 'ONE_TO_MANY' ? 'blue' : 'safe'
         };
       });

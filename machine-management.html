@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Quản Lý Máy Móc – Med Lab</title>
+  <title>Quản Lý & Giám Sát Thiết Bị – Med Lab</title>
   <link rel="stylesheet" href="styles/main.css"/>
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="styles/modules.css"/>
@@ -13,57 +13,276 @@
   <aside class="sidebar" id="sidebar"></aside>
   <div class="main-content">
     <header class="topbar" id="topbar"></header>
-    <main class="page-content">
+    <main class="page-content" style="padding:24px;">
 
-      <div class="page-header">
-        <div class="page-header__left">
-          <h2>Quản Lý Máy Móc &amp; Thiết Bị</h2>
-          <p>CRUD thiết bị VLTL – 46 máy thực tế. Mã máy lấy từ cột F danh sách chuẩn hóa khoa (22.1.2026).</p>
-        </div>
-        <div class="page-header__actions">
-          <button class="btn btn--ghost btn--sm" onclick="exportMachineCSV()">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            Xuất CSV
-          </button>
-          <button class="btn btn--primary" onclick="openModal('addMachineModal')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-            Thêm máy
-          </button>
+      <!-- Top Hero Banner matching Visily Design -->
+      <div style="background:linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); color:#fff; border-radius:16px; padding:28px 32px; margin-bottom:24px; box-shadow:0 10px 25px rgba(37,99,235,0.2); position:relative; overflow:hidden;">
+        <div style="position:absolute; right:-20px; bottom:-30px; opacity:0.1; font-size:160px;">⚙️</div>
+        <div style="display:inline-block; background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; margin-bottom:12px;">Trung tâm điều hành thiết bị Med Lab</div>
+        <h1 style="font-size:26px; font-weight:800; margin-bottom:8px;">Quản lý &amp; Giám sát Thiết bị</h1>
+        <p style="font-size:13px; opacity:0.9; max-width:700px; margin-bottom:20px; line-height:1.5;">
+          Hệ thống đang theo dõi 48 thiết bị hoạt động ổn định. Có 12 thiết bị được lên lịch bảo trì định kỳ trong tháng này để đảm bảo hiệu suất lâm sàng tối ưu.
+        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; gap:12px;">
+            <button class="btn" style="background:#fff; color:#2563EB; font-weight:600;" onclick="openModal('addMachineModal')">
+              + Thêm máy móc mới
+            </button>
+            <button class="btn" style="background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3);" onclick="showToast('Đang xuất báo cáo hiệu suất thiết bị...', 'info')">
+              Xuất báo cáo hiệu suất
+            </button>
+          </div>
+          <div style="font-size:13px; font-weight:500; background:rgba(0,0,0,0.15); padding:6px 14px; border-radius:8px;">
+            🗓 Thứ Ba, 25 tháng 7, 2026
+          </div>
         </div>
       </div>
 
-      <!-- Stats -->
-      <div class="patient-status-row" id="machineStats"></div>
-
-      <!-- Filter -->
-      <div class="filter-bar">
-        <div class="topbar__search" style="min-width:280px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="text" id="machineSearch" placeholder="Tên máy, mã máy, thủ thuật..." oninput="renderMachineGroups()"/>
+      <!-- Stats Row (4 cards matching Visily Design) -->
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom:24px;">
+        <div class="card" style="padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase;">Tổng thiết bị</div>
+            <span style="font-size:11px; font-weight:600; color:var(--color-primary); background:#EFF6FF; padding:2px 8px; border-radius:20px;">+2 cái mới</span>
+          </div>
+          <div style="font-size:28px; font-weight:800; color:var(--color-gray-900);">28</div>
         </div>
-        <select class="form-select" id="machineStatusFilter" onchange="renderMachineGroups()" style="width:180px">
-          <option value="">Tất cả trạng thái</option>
-          <option value="ACTIVE">Hoạt động</option>
-          <option value="MAINTENANCE">Bảo trì</option>
-          <option value="INACTIVE">Ngừng hoạt động</option>
-        </select>
-        <select class="form-select" id="machineGroupFilter" onchange="renderMachineGroups()" style="width:200px">
-          <option value="">Tất cả nhóm</option>
-          <option value="dien_cham">Điện châm</option>
-          <option value="hong_ngoai">Hồng ngoại</option>
-          <option value="sieu_am">Siêu âm</option>
-          <option value="dien_xung">Điện xung</option>
-          <option value="oxy_cao_ap">Oxy cao áp</option>
-          <option value="keo_gian">Kéo giãn</option>
-          <option value="laser_noi_mach">Laser nội mạch</option>
-          <option value="song_ngan">Sóng ngắn</option>
-          <option value="parafin">Parafin</option>
-          <option value="tap_vd">Xe đạp tập</option>
-        </select>
+
+        <div class="card" style="padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase;">Đang vận hành</div>
+            <span style="font-size:11px; font-weight:600; color:var(--color-success); background:#F0FDF4; padding:2px 8px; border-radius:20px;">85.7% Công suất</span>
+          </div>
+          <div style="font-size:28px; font-weight:800; color:var(--color-success);">24/28</div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase;">Đang bảo trì</div>
+            <span style="font-size:11px; font-weight:600; color:#D97706; background:#FEF3C7; padding:2px 8px; border-radius:20px;">1 ca sửa chữa gấp</span>
+          </div>
+          <div style="font-size:28px; font-weight:800; color:#D97706;">03</div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:600; color:var(--color-gray-500); text-transform:uppercase;">Cảnh báo lỗi</div>
+            <span style="font-size:11px; font-weight:600; color:var(--color-danger); background:#FEF2F2; padding:2px 8px; border-radius:20px;">CT Scanner Philips</span>
+          </div>
+          <div style="font-size:28px; font-weight:800; color:var(--color-danger);">01</div>
+        </div>
       </div>
 
-      <!-- Machine groups -->
-      <div id="machineGroupsWrap"></div>
+      <!-- Main Layout Grid (Left: Machine list / Right: Analytics & Maintenance Tasks) -->
+      <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px;">
+
+        <!-- Left Column: Danh sách máy móc -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="card" style="padding:16px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-size:16px; font-weight:700; color:var(--color-gray-900);">Danh sách máy móc</div>
+              <div style="font-size:12px; color:var(--color-gray-500);">Giám sát tình trạng hoạt động chi tiết của từng thiết bị.</div>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <div style="position:relative; width:220px;">
+                <svg style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--color-gray-400);" width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <input type="text" id="machineSearch" placeholder="Tìm ID, tên máy..." oninput="renderMachineGroups()" style="width:100%; padding:8px 12px 8px 36px; border:1px solid var(--color-gray-200); border-radius:8px; font-size:13px; outline:none;" />
+              </div>
+              <button class="btn btn--ghost btn--sm" onclick="showToast('Bộ lọc thiết bị', 'info')">⚙️</button>
+              <div style="display:flex; background:var(--color-gray-100); border-radius:8px; padding:2px;">
+                <button class="btn btn--sm" style="background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.05); font-weight:600;">Lưới</button>
+                <button class="btn btn--ghost btn--sm" onclick="window.location='machine-management.html?view=table'">Danh sách</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Machine Cards Grid matching Visily Design -->
+          <div id="machineGroupsWrap" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <!-- Card 1: MRI Siemens Skyra -->
+            <div class="card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px; padding:16px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                  <div style="width:50px; height:50px; background:#EFF6FF; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🧲</div>
+                  <span style="background:#F0FDF4; color:#16A34A; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600;">● Hoạt động</span>
+                </div>
+                <div style="font-weight:700; font-size:15px; color:var(--color-gray-900);">MRI Siemens Skyra 3T</div>
+                <div style="font-size:12px; color:var(--color-gray-500); margin-bottom:12px;">Skyra 3T v2.0 • Tầng 1</div>
+                <div style="margin-bottom:8px;">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                    <span style="color:var(--color-gray-500);">Hiệu suất hoạt động</span>
+                    <span style="font-weight:700; color:var(--color-primary);">85%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--color-gray-100); border-radius:3px; overflow:hidden;">
+                    <div style="width:85%; height:100%; background:var(--color-primary); border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid var(--color-gray-100); padding-top:12px; display:flex; justify-content:space-between; font-size:11px; color:var(--color-gray-500);">
+                <div>Bảo trì gần nhất: <strong style="color:var(--color-gray-800)">20/06/2026</strong></div>
+                <div>Kế tiếp: <strong style="color:var(--color-primary)">20/12/2026</strong></div>
+              </div>
+            </div>
+
+            <!-- Card 2: Centrifuge Lab-X -->
+            <div class="card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px; padding:16px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                  <div style="width:50px; height:50px; background:#FEF3C7; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🔬</div>
+                  <span style="background:#FEF3C7; color:#D97706; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600;">🔧 Bảo trì</span>
+                </div>
+                <div style="font-weight:700; font-size:15px; color:var(--color-gray-900);">Centrifuge Lab-X</div>
+                <div style="font-size:12px; color:var(--color-gray-500); margin-bottom:12px;">LX-500 High Speed • Phòng Lab 2</div>
+                <div style="margin-bottom:8px;">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                    <span style="color:var(--color-gray-500);">Hiệu suất hoạt động</span>
+                    <span style="font-weight:700; color:#D97706;">0% (Bảo trì)</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--color-gray-100); border-radius:3px; overflow:hidden;">
+                    <div style="width:0%; height:100%; background:#D97706; border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid var(--color-gray-100); padding-top:12px; display:flex; justify-content:space-between; font-size:11px; color:var(--color-gray-500);">
+                <div>Bảo trì gần nhất: <strong style="color:var(--color-gray-800)">15/07/2026</strong></div>
+                <div>Kế tiếp: <strong style="color:var(--color-danger)">15/08/2026</strong></div>
+              </div>
+            </div>
+
+            <!-- Card 3: CT Scanner Philips -->
+            <div class="card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px; padding:16px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                  <div style="width:50px; height:50px; background:#EFF6FF; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">📡</div>
+                  <span style="background:#F0FDF4; color:#16A34A; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600;">● Hoạt động</span>
+                </div>
+                <div style="font-weight:700; font-size:15px; color:var(--color-gray-900);">CT Scanner Philips</div>
+                <div style="font-size:12px; color:var(--color-gray-500); margin-bottom:12px;">Brilliance ICT 256 • Tầng 2</div>
+                <div style="margin-bottom:8px;">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                    <span style="color:var(--color-gray-500);">Hiệu suất hoạt động</span>
+                    <span style="font-weight:700; color:var(--color-primary);">62%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--color-gray-100); border-radius:3px; overflow:hidden;">
+                    <div style="width:62%; height:100%; background:var(--color-primary); border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid var(--color-gray-100); padding-top:12px; display:flex; justify-content:space-between; font-size:11px; color:var(--color-gray-500);">
+                <div>Bảo trì gần nhất: <strong style="color:var(--color-gray-800)">05/05/2026</strong></div>
+                <div>Kế tiếp: <strong style="color:var(--color-primary)">05/11/2026</strong></div>
+              </div>
+            </div>
+
+            <!-- Card 4: Máy siêu âm GE Voluson -->
+            <div class="card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px; padding:16px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                  <div style="width:50px; height:50px; background:#F0FDF4; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🔊</div>
+                  <span style="background:#F0FDF4; color:#16A34A; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600;">● Hoạt động</span>
+                </div>
+                <div style="font-weight:700; font-size:15px; color:var(--color-gray-900);">Máy siêu âm GE Voluson</div>
+                <div style="font-size:12px; color:var(--color-gray-500); margin-bottom:12px;">Voluson E10 • Phòng Siêu âm 1</div>
+                <div style="margin-bottom:8px;">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                    <span style="color:var(--color-gray-500);">Hiệu suất hoạt động</span>
+                    <span style="font-weight:700; color:#16A34A;">98%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:var(--color-gray-100); border-radius:3px; overflow:hidden;">
+                    <div style="width:98%; height:100%; background:#16A34A; border-radius:3px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid var(--color-gray-100); padding-top:12px; display:flex; justify-content:space-between; font-size:11px; color:var(--color-gray-500);">
+                <div>Bảo trì gần nhất: <strong style="color:var(--color-gray-800)">10/06/2026</strong></div>
+                <div>Kế tiếp: <strong style="color:var(--color-primary)">10/12/2026</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Analytics, Logs & Maintenance Tasks -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <!-- Hiệu suất trung bình -->
+          <div class="card" style="padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div>
+                <div style="font-size:15px; font-weight:700; color:var(--color-gray-900);">Hiệu suất trung bình</div>
+                <div style="font-size:11px; color:var(--color-gray-500);">Biểu đồ 24h qua</div>
+              </div>
+              <span style="background:#F0FDF4; color:#16A34A; font-size:11px; font-weight:600; padding:2px 8px; border-radius:12px;">Cao điểm (10:00) 95%</span>
+            </div>
+            <!-- Mock SVG Chart matching Visily Design -->
+            <div style="height:120px; display:flex; align-items:flex-end; justify-content:space-between; padding-top:20px; position:relative;">
+              <svg style="position:absolute; inset:0; width:100%; height:100%; overflow:visible;" viewBox="0 0 300 100" preserveAspectRatio="none">
+                <path d="M0 80 Q 75 20, 150 40 T 300 30 L 300 100 L 0 100 Z" fill="rgba(37,99,235,0.1)"></path>
+                <path d="M0 80 Q 75 20, 150 40 T 300 30" fill="none" stroke="#2563EB" stroke-width="2.5"></path>
+              </svg>
+              <div style="font-size:10px; color:var(--color-gray-400); z-index:1;">10:00</div>
+              <div style="font-size:10px; color:var(--color-gray-400); z-index:1;">12:00</div>
+              <div style="font-size:10px; color:var(--color-gray-400); z-index:1;">14:00</div>
+              <div style="font-size:10px; color:var(--color-gray-400); z-index:1;">16:00</div>
+              <div style="font-size:10px; color:var(--color-gray-400); z-index:1;">18:00</div>
+            </div>
+          </div>
+
+          <!-- Nhật ký hoạt động -->
+          <div class="card" style="padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <div style="font-size:15px; font-weight:700; color:var(--color-gray-900);">Nhật ký hoạt động</div>
+              <a href="#" onclick="showToast('Mở toàn bộ nhật ký', 'info'); return false;" style="font-size:12px; color:var(--color-primary); font-weight:600;">Xem tất cả</a>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; font-size:12px;">
+              <div style="display:flex; align-items:flex-start; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--color-gray-100);">
+                <span style="font-size:16px;">✅</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:var(--color-gray-900);">Hoàn thành bảo trì</div>
+                  <div style="color:var(--color-gray-500); font-size:11px;">MRI Siemens Skyra • 10 phút trước</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:flex-start; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--color-gray-100);">
+                <span style="font-size:16px;">⚠</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:var(--color-danger);">Cảnh báo lỗi nhiệt độ</div>
+                  <div style="color:var(--color-gray-500); font-size:11px;">Centrifuge Lab-X • 1 giờ trước</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:flex-start; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--color-gray-100);">
+                <span style="font-size:16px;">🔄</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:var(--color-gray-900);">Cập nhật phần mềm</div>
+                  <div style="color:var(--color-gray-500); font-size:11px;">CT Scanner Philips • 3 giờ trước</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:flex-start; gap:10px;">
+                <span style="font-size:16px;">📅</span>
+                <div style="flex:1;">
+                  <div style="font-weight:600; color:var(--color-gray-900);">Lên lịch kiểm định</div>
+                  <div style="color:var(--color-gray-500); font-size:11px;">Máy siêu âm GE Voluson • 5 giờ trước</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nhiệm vụ bảo trì -->
+          <div class="card" style="padding:16px; border:1px solid #93C5FD; background:#EFF6FF;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div style="font-size:15px; font-weight:700; color:var(--color-primary); display:flex; align-items:center; gap:8px;">
+                <span>🛠️</span> Nhiệm vụ bảo trì
+              </div>
+              <span style="font-size:11px; font-weight:700; background:#DC2626; color:#fff; padding:2px 8px; border-radius:10px;">KHẨN CẤP</span>
+            </div>
+            <div style="font-weight:700; font-size:13px; color:var(--color-gray-900); margin-bottom:4px;">Thay thế bộ lọc He-3</div>
+            <div style="font-size:12px; color:var(--color-gray-600); margin-bottom:12px;">MRI Siemens Skyra – Tầng 1</div>
+            <button class="btn btn--primary" style="width:100%; justify-content:center; margin-bottom:8px;" onclick="showToast('Đã bắt đầu thực hiện nhiệm vụ bảo trì He-3', 'success')">Bắt đầu thực hiện</button>
+            <a href="#" onclick="showToast('Mở lịch trình tuần này', 'info'); return false;" style="display:block; text-align:center; font-size:12px; color:var(--color-primary); font-weight:600;">Xem lịch trình tuần này →</a>
+          </div>
+
+        </div>
+
+      </div>
 
     </main>
   </div>
@@ -101,18 +320,6 @@
   </div>
 </div>
 
-<!-- Edit Machine Modal -->
-<div class="modal-overlay" id="editMachineModal">
-  <div class="modal">
-    <div class="modal__header"><div class="modal__title">Chỉnh sửa thiết bị</div><button class="modal__close" onclick="closeModal('editMachineModal')">✕</button></div>
-    <div class="modal__body" id="editMachineBody"></div>
-    <div class="modal__footer">
-      <button class="btn btn--ghost" onclick="closeModal('editMachineModal')">Hủy</button>
-      <button class="btn btn--primary" onclick="saveMachineEdit()">Lưu thay đổi</button>
-    </div>
-  </div>
-</div>
-
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 <script src="js/ui.js"></script>
@@ -121,11 +328,10 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderSidebar('machine-management');
     renderTopbar();
-    renderMachineGroups();
-    renderMachineStats();
-    // populate procedure select
     const sel = document.getElementById('mProcedure');
-    PROCEDURE_DICT.forEach(p => { const o=document.createElement('option'); o.value=p.id; o.textContent=p.name; sel.appendChild(o); });
+    if (sel && typeof PROCEDURE_DICT !== 'undefined') {
+      PROCEDURE_DICT.forEach(p => { const o=document.createElement('option'); o.value=p.id; o.textContent=p.name; sel.appendChild(o); });
+    }
   });
 </script>
 </body>

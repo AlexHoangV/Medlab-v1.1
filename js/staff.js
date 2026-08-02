@@ -171,6 +171,45 @@ function addStaff() {
   showToast(`Đã thêm nhân sự: ${name}`, 'success');
 }
 
+function renderStaffTable() {
+  const tbody = document.querySelector('.data-table tbody');
+  if (!tbody) return;
+  tbody.innerHTML = STAFF_DB.map(s => {
+    const roleLabel = { DOCTOR:'Bác sĩ', TECHNICIAN:'Kỹ thuật viên', NURSE:'Điều dưỡng' }[s.role] || s.role;
+    return `
+    <tr style="border-bottom:1px solid var(--color-gray-100);">
+      <td style="padding:14px 16px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:#EFF6FF; color:#2563EB; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px;">${s.initials}</div>
+          <div>
+            <div style="font-weight:600;">${s.fullName}</div>
+            <div style="font-size:11px; color:var(--color-gray-500);">STF-${String(s.id).padStart(3,'0')}</div>
+          </div>
+        </div>
+      </td>
+      <td style="padding:14px 16px; font-weight:500;">${roleLabel}</td>
+      <td style="padding:14px 16px; color:var(--color-gray-600);">${s.specialty}</td>
+      <td style="padding:14px 16px;">
+        <div style="font-weight:500;">Sáng (07:00 - 15:00)</div>
+      </td>
+      <td style="padding:14px 16px;">
+        <span style="background:${s.isActive ? '#F0FDF4' : '#FEF2F2'}; color:${s.isActive ? '#16A34A' : '#DC2626'}; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600;">● ${s.isActive ? 'Sẵn sàng' : 'Bận'}</span>
+      </td>
+      <td style="padding:14px 16px; text-align:right;">
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="icon-btn" onclick="showToast('Xem lịch trực ${s.fullName}', 'info')" title="Lịch trực">📅</button>
+          <button class="icon-btn" onclick="openStaffActionsModal(${s.id})">⋮</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function openStaffActionsModal(id) {
+  showToast('Đang mở bảng thao tác nhân sự (ID: ' + id + ')', 'info');
+  // TO BE IMPLEMENTED: Proper Action Modal
+}
+
 function removeStaff(id) {
   const s = STAFF_DB.find(x => x.id === id);
   if (!s) return;
@@ -182,7 +221,7 @@ function removeStaff(id) {
   const idx = STAFF_DB.findIndex(x => x.id === id);
   if (idx > -1) STAFF_DB.splice(idx, 1);
   persistData();
-  renderStaffGrid(); renderStaffSummary();
+  renderStaffGrid(); renderStaffSummary(); renderStaffTable();
   showToast(`Đã xóa nhân sự: ${s.fullName}`, 'success');
 }
 
