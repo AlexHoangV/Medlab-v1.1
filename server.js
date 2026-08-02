@@ -21,7 +21,18 @@ app.use((req, res, next) => {
    BACKEND DATABASE & API LAYER FOR 7 MEDLAB MODULES (BHYT COMPLIANT)
    ═════════════════════════════════════════════════════════════════ */
 
-const DB_FILE = path.join(__dirname, 'medlab_db.json');
+const isVercel = process.env.VERCEL || process.env.NODE_ENV === 'production';
+const DB_FILE = isVercel ? path.join('/tmp', 'medlab_db.json') : path.join(__dirname, 'medlab_db.json');
+
+// Ensure db exists in tmp if on vercel
+if (isVercel && !fs.existsSync(DB_FILE)) {
+  const sourceDb = path.join(__dirname, 'medlab_db.json');
+  if (fs.existsSync(sourceDb)) {
+    try {
+      fs.copyFileSync(sourceDb, DB_FILE);
+    } catch (e) {}
+  }
+}
 
 // Initialize Default Database from 3 Google Sheets & TT 43/2013/TT-BYT
 function getDefaultDB() {
@@ -339,7 +350,11 @@ app.use((req, res) => {
   }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ MedLab AI server & REST API running at http://0.0.0.0:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ MedLab AI server & REST API running at http://0.0.0.0:${PORT}`);
+  });
+}
+
+export default app;
 
