@@ -3,7 +3,18 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "styles/**",
+          "js/**",
+          "*.html",
+          "medlab_db.json",
+          "logo.svg",
+          "assets/**",
+          ".env.example"
+        ]
+      }
     }
   ],
   "routes": [
