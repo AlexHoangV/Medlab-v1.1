@@ -338,7 +338,8 @@ async function startApp() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(__dirname, 'dist');
+    // server.cjs is located in /dist, so static files are in the same directory.
+    const distPath = __dirname;
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       const requestedPath = path.join(distPath, req.path);
