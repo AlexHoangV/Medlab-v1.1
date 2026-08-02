@@ -1,15 +1,3 @@
 {
-  "version": 2,
-  "rewrites": [
-    { "source": "/dashboard", "destination": "/dashboard.html" },
-    { "source": "/calendar", "destination": "/calendar.html" },
-    { "source": "/patient-management", "destination": "/patient-management.html" },
-    { "source": "/staff-management", "destination": "/staff-management.html" },
-    { "source": "/machine-management", "destination": "/machine-management.html" },
-    { "source": "/procedure-entry", "destination": "/procedure-entry.html" },
-    { "source": "/schedule-matrix", "destination": "/schedule-matrix.html" },
-    { "source": "/time-allocation", "destination": "/time-allocation.html" },
-    { "source": "/login", "destination": "/login.html" },
-    { "source": "/api/(.*)", "destination": "/api/index.js" }
-  ]
+  "framework": "vite"
 }
