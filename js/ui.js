@@ -18,12 +18,14 @@ function renderSidebar(activeId) {
   if (!el) return;
   el.innerHTML = `
     <div class="sidebar__brand">
-      <div class="sidebar__logo">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>
+      <div class="sidebar__logo" style="background:linear-gradient(135deg,#2563EB,#1D4ED8);display:flex;align-items:center;justify-content:center;border-radius:10px;box-shadow:0 4px 12px rgba(37,99,235,0.3)">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+          <path d="M20 3C20 3 29 5 33 11C37 17 37 25 33 32C29 39 20 37 20 37C20 37 11 39 7 32C3 25 3 17 7 11C11 5 20 3 20 3Z" fill="#3B82F6"/>
+          <rect x="17" y="11" width="6" height="18" rx="2" fill="white"/>
+          <rect x="11" y="17" width="18" height="6" rx="2" fill="white"/>
         </svg>
       </div>
-      <div><div class="sidebar__title">Med Lab</div><div class="sidebar__sub">Hệ thống quản lý</div></div>
+      <div><div class="sidebar__title">MedLab AI</div><div class="sidebar__sub">Hệ thống YHCT & PHCN</div></div>
     </div>
     <nav class="sidebar__nav">
       ${NAV_ITEMS.map(item => `
@@ -44,11 +46,16 @@ function renderTopbar() {
   const el = document.getElementById('topbar');
   if (!el) return;
   el.innerHTML = `
-    <nav class="topbar__breadcrumb">
-      <a href="dashboard.html">Bệnh viện</a>
-      <span class="sep">›</span>
-      <span class="current">Med Lab – Khoa VLTL</span>
-    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="mobile-menu-btn" onclick="toggleMobileSidebar()" style="display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--color-gray-700)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <nav class="topbar__breadcrumb">
+        <a href="dashboard.html">Bệnh viện</a>
+        <span class="sep">›</span>
+        <span class="current">MedLab AI</span>
+      </nav>
+    </div>
     <div class="topbar__right">
       <div class="topbar__search">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -60,10 +67,17 @@ function renderTopbar() {
       </div>
       <div class="topbar__user">
         <div class="topbar__avatar">VA</div>
-        <div class="topbar__user-info">
+        <div class="topbar__user-info hide-mobile">
           <div class="topbar__user-name">BS. Nguyễn Văn A</div>
           <div class="topbar__user-role">Khoa VLTL</div>
         </div>
       </div>
     </div>`;
+
+  window.toggleMobileSidebar = () => {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('sidebar--open');
+    }
+  };
 }
