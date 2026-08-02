@@ -341,7 +341,12 @@ async function startApp() {
     const distPath = path.join(__dirname, 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      const requestedPath = path.join(distPath, req.path);
+      if (fs.existsSync(requestedPath) && !requestedPath.endsWith('.cjs')) {
+        res.sendFile(requestedPath);
+      } else {
+        res.sendFile(path.join(distPath, 'index.html'));
+      }
     });
   }
 
